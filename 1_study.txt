@@ -94,3 +94,39 @@
 
 #150702 스터디#
 1. 제품 3가지 설정(용랑, 이름, 버전업그레이드)
+
+2.hbase 설치 완료
+	cd /usr/local
+    	mkdir data
+    	wget http://www.apache.org/dist/hbase/stable/hbase-1.0.1.1-bin.tar.gz
+    	tar xvfz hbase-1.0.1.1-bin.tar.gz
+    	cd hbase-1.0.1.1
+
+    	hbase_rootdir=${TMPDIR-'/usr/local/data'}/tsdhbase
+   	iface=lo`uname | sed -n s/Darwin/0/p`
+
+    	vi conf/hbase-site.xml
+
+    	configuration 태그 사이의 내용을 넣어주면 됨
+
+     	<?xml version="1.0"?>
+     	<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+     	<configuration>
+       	<property>
+         		<name>hbase.rootdir</name>
+         		<value>file:///DIRECTORY/hbase</value>
+       	</property>
+       	<property>
+         		<name>hbase.zookeeper.property.dataDir</name>
+         		<value>/DIRECTORY/zookeeper</value>
+        	</property>
+     	</configuration>
+
+	./bin/start-hbase.sh =>hbase 실행
+
+3. GnuPlot 설치 완료
+	=>경로는 ~/.bashrc에 추가하기
+  openTSDB 설치 완료
+  Tcollector 설치 완료
+
+
