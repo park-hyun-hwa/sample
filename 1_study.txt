@@ -126,7 +126,117 @@
 
 3. GnuPlot 설치 완료
 	=>경로는 ~/.bashrc에 추가하기
-  openTSDB 설치 완료
-  Tcollector 설치 완료
+	cd /usr/local
+     	apt-get install gcc
+     	apt-get install libgd2-xpm-dev
+     	wget 				http://sourceforge.net/projects/gnuplot/files/gnuplot/4.6.3/gnuplot-4.6.3.tar.gz
+     	tar zxvf gnuplot-4.6.3.tar.gz
+     	cd gnuplot-4.6.3
+     	./configure
+     	make install
+     	apt-get install gnuplot
+
+    	apt-get install dh-autoreconf
+
+  4. openTSDB 설치 완료
+	cd /usr/local
+     	git clone git://github.com/OpenTSDB/opentsdb.git
+
+     	cd opentsdb
+     	./build.sh
+		=>java heap error가 나면
+		./.bashrc에 
+		export JABA_OPTS="-Xms512m -Xmx2048m -XX:MaxPermSize=512m" 을 추가하기
+		=>
+     	env COMPRESSION=NONE 	HBASE_HOME=/usr/local/hbase-1.0.1.1 ./src/create_table.sh
+
+    	tsdtmp=${TMPDIR-'/usr/local/data'}/tsd
+     	mkdir -p "$tsdtmp"
+
+     	여기서 screen 으로 
+     	screen -dmS tsdb
+     	screen -list
+    	tsdb로 -r tsdb
+
+     	./build/tsdb tsd --port=4242 --staticroot=build/staticroot --cachedir=/usr/local/data --auto-metric
+
+     	실행 후에는 Ctl + a + d 로 빠져나옴
+
+  5. Tcollector 설치 완료
+	cd /usr/local
+     	git clone git://github.com/OpenTSDB/tcollector.git
+     	cd tcollector
+     	vi startstop
+
+    	#TSD_HOST=dns.name.of.tsd 이부분에서 주석해제하고 IP를 적어주면 됨	(아래처럼)
+     	TSD_HOST=127.0.0.1 (ip주소)
+
+##################################################
+
+#150703 스터디#
+
+1. openTSDB 실행 순서
+	cd hyunhwa/workspace/openTSDB
+	./openTSDB.sh =>스크립트 생성함.
+	
+	./startTSDB.sh =>스크립트 생성함.
 
 
+2. screen 명령어
+- screen이라는 리눅스 프로세스를 사용하여 연결이 끊어져도 서버에 session이 유지되기 때문에 프로세스가 멈추지 않고 계속 작동.
+
+- screen -dmS : 데몬으로 시작(detached 모드)
+   screen -list : 리스트 출력
+   screen -r [session] : detach된 프로세스를 reattach하기
+
+3. openTSDB 다시 설치해보기
+	./build.sh를 수행하는 과정에서 java heap 에러 발생
+		=>해결방법 찾기
+
+4. LCD 예제 실행
+- ip_addr.py
+	1	GND
+	2	5V
+	3 	GND
+	4	6
+	5	GND
+	6	13
+	7
+	8
+	9	
+	10
+	11	19
+	12	26
+	13	21
+	14	20
+	15	5V
+	16	16
+	17	12
+	18	7
+
+- 16x2_LCD_RGB.py
+	1	GND
+	2	5V
+	3 	GND
+	4	27
+	5	GND
+	6	22
+	7
+	8
+	9	
+	10
+	11	25
+	12	24
+	13	23
+	14	12
+	15	5V
+	16	4
+	17	17
+	18	7
+
+5. 집에서 해볼 것
+	공유기에 무선으로 연결
+	온습도 센서를 이용해서 구성한 라즈베리 파이에 LCD로 mac 주소 확인
+	완성된 라즈베리파이를 냉장고에 넣고 센서 테스트
+	
+	
