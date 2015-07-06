@@ -2,32 +2,34 @@
 #150629 스터디#
 ###1. 무선 랜 설정(네이버 검색 : http://m.blog.naver.com/shumin/220309949028)###
 	-아이콘이 존재하지는 않는 관계로 수동 설정이 필요했음.
+	
 	lsusb
 	ifconfig
 	sudo nano /etc/wpa_supplicant/wpa_supplicant.conf에 작성
 
   wpa_supplicant 파일은 와이파이 인터페이스 설정과 AP 목록을 관리한다.
-  wpa_supplicant.conf는 wpa_supplicant를위한 구성 파일, WPA 및 WiFi 네트워크
-  를 구현하는 다른 보안 프로토콜을 구현하는 데 사용되는 소프트웨어입니다.
-  network = {
-  ssid="keti_tinyos_01"
-  key_mgmt=WPA-PSK
-  psk="allberkeley"
-  }
+  wpa_supplicant.conf는 wpa_supplicant를위한 구성 파일, WPA 및 WiFi 네트워크를 구현하는 다른 보안 프로토콜을 구현하는 데 사용되는 소프트웨어입니다.
+  
+  	network = {
+  		ssid="keti_tinyos_01"
+  		key_mgmt=WPA-PSK
+  		psk="allberkeley"
+  	}
+  	
   key_mgmt 는 key_management로 암호화방식?을 의미
   psk는 비밀번호를 의미
 
 	sudo nano /etc/network/interfaces에 작성
 
-  auto lo
-  iface lo inet loopback
-  iface eth0 inet dhcp
+  	auto lO
+  	iface lo inet loopback
+  	iface eth0 inet dhcp
   
-  auto wlan0
-  allow-hotplug wlan0
-  iface wlan0 inet dhcp
-  wpa-ssid "keti_tinyos_01"
-  wpa-psk "allberkeley"
+  	auto wlan0
+  	allow-hotplug wlan0
+  	iface wlan0 inet dhcp
+  	wpa-ssid "keti_tinyos_01"
+  	wpa-psk "allberkeley"
 
   
 ###2. java 설정###
