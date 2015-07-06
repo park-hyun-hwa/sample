@@ -1,6 +1,6 @@
 
 #150629 스터디#
-1. 무선 랜 설정(네이버 검색 : http://m.blog.naver.com/shumin/220309949028)
+###1. 무선 랜 설정(네이버 검색 : http://m.blog.naver.com/shumin/220309949028)###
 	-아이콘이 존재하지는 않는 관계로 수동 설정이 필요했음.
 	lsusb
 	ifconfig
@@ -30,7 +30,7 @@
   wpa-psk "allberkeley"
 
   
-2. java 설정
+###2. java 설정###
 	java -version
 	which java
 
@@ -48,7 +48,7 @@
 
 #150630 스터디#
 	=< kowonsik.com >에서 '라즈베리파이 opentsd?'에서 과정 익히기
-1. hbase 설치 및 설정
+###1. hbase 설치 및 설정###
   	=홈페이지 다운으로 진행하지 못함.
 
 ##################################################
