@@ -10,7 +10,8 @@
 -온습도 센서 연결
 
         http://www.sensirion.com/fileadmin/user_upload/customers/sensirion/Dokumente/Humidity/Sensirion_Humidity_SHT20_Datasheet_V3.pdf
-        | 온습도 pin(with CO2) | 온습도 pin (only) | Function           | RasPi pin |
+        
+| 온습도 pin(with CO2) | 온습도 pin (only) | Function           | RasPi pin |
 |:--------------------:|:-----------------:|--------------------|-----------|
 |           2          |         1         | SDA                | SDA       |
 |           5          |         2         | VSS                | GND       |
@@ -36,7 +37,6 @@
         
         i2c-bcm2708
         i2c-dev
-        
         추가
         
 -온습도 센서 연결 확인
