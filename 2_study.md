@@ -23,9 +23,9 @@
 |           1          |         5         | VDD                | 3.3V      |
 |           3          |         6         | SCL                | SCL       |
 
-![](pictures/IMG_0071.jpg)
+![](picture/IMG_0071.jpg)
 
-![](pictures/IMG_0073.jpg)
+![](picture/IMG_0073.jpg)
   
 -온습도 센서 연결 후 설정(Setup)
 
@@ -54,4 +54,4 @@
 
         sudo python sht20.py
         
-![](pictures/IMG_0074.jpg)
+![](picture/IMG_0074.jpg)
