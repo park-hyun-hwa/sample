@@ -138,7 +138,9 @@
 
     	apt-get install dh-autoreconf
 
- ###4. openTSDB 설치 완료###
+###4. openTSDB 설치 완료###
+	
+	
 	cd /usr/local
      	git clone git://github.com/OpenTSDB/opentsdb.git
 
@@ -183,11 +185,11 @@
 
 
 ###2. screen 명령어###
-- screen이라는 리눅스 프로세스를 사용하여 연결이 끊어져도 서버에 session이 유지되기 때문에 프로세스가 멈추지 않고 계속 작동.
+	- screen이라는 리눅스 프로세스를 사용하여 연결이 끊어져도 서버에 session이 유지되기 때문에 프로세스가 멈추지 않고 계속 작동.
 
-- screen -dmS : 데몬으로 시작(detached 모드)
-   screen -list : 리스트 출력
-   screen -r [session] : detach된 프로세스를 reattach하기
+	- screen -dmS : 데몬으로 시작(detached 모드)
+   	screen -list : 리스트 출력
+   	screen -r [session] : detach된 프로세스를 reattach하기
 
 ###3. openTSDB 다시 설치해보기###
 	./build.sh를 수행하는 과정에서 java heap 에러 발생
