@@ -20,7 +20,7 @@
 |:--------------------:|:-----------------:|--------------------|-----------|
 |           2          |         1         | SDA                | SDA       |
 |           5          |         2         | VSS                | GND       |
-|           1          |         3         | NC (Not Connected) | -         |
+|           -          |         3         | NC (Not Connected) | -         |
 |           -          |         4         | NC (Not Connected) | -         |
 |           1          |         5         | VDD                | 3.3V      |
 |           3          |         6         | SCL                | SCL       |
@@ -69,4 +69,6 @@
         
 - sudo python sht20_lcd.py 으로 실행
  
+-실행 화면
+
 
