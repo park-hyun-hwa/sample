@@ -4,9 +4,9 @@
 - 참고 : http://sergeswin.com/1013
 
 ###2. LCD와 온습도 센서 연결하기###
--LCD에서는 연결된 상태를 표시하고, 온습도 센서를 이용해서 데이터 읽어들이기
+- LCD에서는 연결된 상태를 표시하고, 온습도 센서를 이용해서 데이터 읽어들이기
 
--LCD 연결
+- LCD 연결
 
         150703 스터디 기록 확인
 
@@ -22,6 +22,10 @@
 |           -          |         4         | NC (Not Connected) | -         |
 |           1          |         5         | VDD                | 3.3V      |
 |           3          |         6         | SCL                | SCL       |
+
+![pictures/IMG_0071.jpg]
+
+![pictures/IMG_0073.jpg]
   
 -온습도 센서 연결 후 설정(Setup)
 
@@ -50,3 +54,4 @@
 
         sudo python sht20.py
         
+![pictures/IMG_0074.jpg]
