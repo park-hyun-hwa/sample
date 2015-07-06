@@ -11,3 +11,15 @@
 
         http://www.sensirion.com/fileadmin/user_upload/customers/sensirion/Dokumente/Humidity/Sensirion_Humidity_SHT20_Datasheet_V3.pdf
   
+-온습도 센서 연결 후 설정(Setup)
+
+        https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c 참고
+        
+-온습도 센서 연결 확인
+
+        sudo i2cdetect 1
+        
+-작동
+
+        sudo python sht20.py
+        
