@@ -16,7 +16,7 @@
   		psk="allberkeley"
   	}
   	
-  key_mgmt 는 key_management로 암호화방식?을 의미
+  key_mgmt 는 key_management로 암호화방식?을 의미.
   psk는 비밀번호를 의미
 
 	sudo nano /etc/network/interfaces에 작성
@@ -58,12 +58,11 @@
 #150701 스터디#
 ###1. 라즈베리 파이 파티션 용량 수동으로 늘리기###
 
-	참고사이트 : http://zelits.tistory.com/65
+-참고사이트 : http://zelits.tistory.com/65
 
 	df -h : 파티션 확인
 	sudo fdisk -l : 파티션 리스트 확인
-	sudo fdisk -u -c /dev/mmcblk0 : -u(unit 단위로 디스플레이),
-						-c(호환 모드)
+	sudo fdisk -u -c /dev/mmcblk0 : -u(unit 단위로 디스플레이),-c(호환 모드)
 	p : 파티션 리스트 출력
 	d 다음 2 : 2번째 디바이스 접근
 	n : 파티션 생성
@@ -78,7 +77,8 @@
 
 
 ###2. 라즈베리 파이 내부에서 github 연동하기(windows도 연동하기)###
-	GitHub을 통해서 소스를 편리하게 공유하고 버젼 관리 가능.
+
+-GitHub을 통해서 소스를 편리하게 공유하고 버젼 관리 가능.
 	
 	처음에 시작할 때 
 	git pull origin[나 주소] master
@@ -90,7 +90,8 @@
 
 
 ###3.hbase 설정###
-	-설정 중 압축이 덜 풀려서 xml 파일 설정에 오류가 남.
+
+-설정 중 압축이 덜 풀려서 xml 파일 설정에 오류가 남.
 
 #################################################
 
@@ -98,6 +99,7 @@
 ###1. 제품 3가지 설정(용랑, 이름, 버전업그레이드)###
 
 ###2.hbase 설치 완료###
+
 	cd /usr/local
     	mkdir data
     	wget http://www.apache.org/dist/hbase/stable/hbase-1.0.1.1-bin.tar.gz
@@ -127,7 +129,9 @@
 	./bin/start-hbase.sh =>hbase 실행
 
 ###3. GnuPlot 설치 완료###
-	=>경로는 ~/.bashrc에 추가하기
+
+- 경로는 ~/.bashrc에 추가하기
+- 
 	cd /usr/local
      	apt-get install gcc
      	apt-get install libgd2-xpm-dev
@@ -141,7 +145,6 @@
     	apt-get install dh-autoreconf
 
 ###4. openTSDB 설치 완료###
-	
 	
 	cd /usr/local
      	git clone git://github.com/OpenTSDB/opentsdb.git
@@ -167,6 +170,7 @@
      	실행 후에는 Ctl + a + d 로 빠져나옴
 
 ###5. Tcollector 설치 완료###
+
 	cd /usr/local
      	git clone git://github.com/OpenTSDB/tcollector.git
      	cd tcollector
