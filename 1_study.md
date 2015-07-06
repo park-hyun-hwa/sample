@@ -11,9 +11,9 @@
   wpa_supplicant.conf는 wpa_supplicant를위한 구성 파일, WPA 및 WiFi 네트워크를 구현하는 다른 보안 프로토콜을 구현하는 데 사용되는 소프트웨어입니다.
   
   	network = {
-  		ssid="keti_tinyos_01"
+  		ssid="XXXX"
   		key_mgmt=WPA-PSK
-  		psk="allberkeley"
+  		psk="XXXX"
   	}
   	
   key_mgmt 는 key_management로 암호화방식?을 의미.
@@ -28,8 +28,8 @@
   	auto wlan0
   	allow-hotplug wlan0
   	iface wlan0 inet dhcp
-  	wpa-ssid "keti_tinyos_01"
-  	wpa-psk "allberkeley"
+  	wpa-ssid "XXX"
+  	wpa-psk "XXX"
 
   
 ###2. java 설정###
@@ -135,7 +135,7 @@
 	cd /usr/local
      	apt-get install gcc
      	apt-get install libgd2-xpm-dev
-     	wget 				http://sourceforge.net/projects/gnuplot/files/gnuplot/4.6.3/gnuplot-4.6.3.tar.gz
+     	wget http://sourceforge.net/projects/gnuplot/files/gnuplot/4.6.3/gnuplot-4.6.3.tar.gz
      	tar zxvf gnuplot-4.6.3.tar.gz
      	cd gnuplot-4.6.3
      	./configure
