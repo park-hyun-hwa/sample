@@ -54,7 +54,7 @@
 ##################################################
 
 #150701 스터디#
-1. 라즈베리 파이 파티션 용량 수동으로 늘리기
+###1. 라즈베리 파이 파티션 용량 수동으로 늘리기###
 
 	참고사이트 : http://zelits.tistory.com/65
 
@@ -75,7 +75,7 @@
 	sudo resize2fs /dev/mmcblk0p2 : 리사이징
 
 
-2. 라즈베리 파이 내부에서 github 연동하기(windows도 연동하기)
+###2. 라즈베리 파이 내부에서 github 연동하기(windows도 연동하기)###
 	GitHub을 통해서 소스를 편리하게 공유하고 버젼 관리 가능.
 	
 	처음에 시작할 때 
@@ -87,15 +87,15 @@
 	하기
 
 
-3.hbase 설정
+###3.hbase 설정###
 	-설정 중 압축이 덜 풀려서 xml 파일 설정에 오류가 남.
 
 #################################################
 
 #150702 스터디#
-1. 제품 3가지 설정(용랑, 이름, 버전업그레이드)
+###1. 제품 3가지 설정(용랑, 이름, 버전업그레이드)###
 
-2.hbase 설치 완료
+###2.hbase 설치 완료###
 	cd /usr/local
     	mkdir data
     	wget http://www.apache.org/dist/hbase/stable/hbase-1.0.1.1-bin.tar.gz
@@ -124,7 +124,7 @@
 
 	./bin/start-hbase.sh =>hbase 실행
 
-3. GnuPlot 설치 완료
+###3. GnuPlot 설치 완료###
 	=>경로는 ~/.bashrc에 추가하기
 	cd /usr/local
      	apt-get install gcc
@@ -138,7 +138,7 @@
 
     	apt-get install dh-autoreconf
 
-  4. openTSDB 설치 완료
+ ###4. openTSDB 설치 완료###
 	cd /usr/local
      	git clone git://github.com/OpenTSDB/opentsdb.git
 
@@ -162,7 +162,7 @@
 
      	실행 후에는 Ctl + a + d 로 빠져나옴
 
-  5. Tcollector 설치 완료
+###5. Tcollector 설치 완료###
 	cd /usr/local
      	git clone git://github.com/OpenTSDB/tcollector.git
      	cd tcollector
@@ -175,25 +175,25 @@
 
 #150703 스터디#
 
-1. openTSDB 실행 순서
+###1. openTSDB 실행 순서###
 	cd hyunhwa/workspace/openTSDB
 	./openTSDB.sh =>스크립트 생성함.
 	
 	./startTSDB.sh =>스크립트 생성함.
 
 
-2. screen 명령어
+###2. screen 명령어###
 - screen이라는 리눅스 프로세스를 사용하여 연결이 끊어져도 서버에 session이 유지되기 때문에 프로세스가 멈추지 않고 계속 작동.
 
 - screen -dmS : 데몬으로 시작(detached 모드)
    screen -list : 리스트 출력
    screen -r [session] : detach된 프로세스를 reattach하기
 
-3. openTSDB 다시 설치해보기
+###3. openTSDB 다시 설치해보기###
 	./build.sh를 수행하는 과정에서 java heap 에러 발생
 		=>해결방법 찾기
 
-4. LCD 예제 실행
+###4. LCD 예제 실행###
 - ip_addr.py
 	1	GND
 	2	5V
@@ -234,7 +234,7 @@
 	17	17
 	18	7
 
-5. 집에서 해볼 것
+###5. 집에서 해볼 것###
 	공유기에 무선으로 연결
 	온습도 센서를 이용해서 구성한 라즈베리 파이에 LCD로 mac 주소 확인
 	완성된 라즈베리파이를 냉장고에 넣고 센서 테스트
