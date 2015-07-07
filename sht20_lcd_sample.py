@@ -65,7 +65,7 @@ def calc(temp, humi):
 
     return tmp_temp, tmp_humi
 def ip_addr():
-   try: 
+  try: 
       serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
   except serial.SerialException, e:
       logger.error("Serial port open error") 
