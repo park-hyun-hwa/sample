@@ -17,9 +17,8 @@ import logging.handlers
 import fcntl,socket,struct
 
 sys.path.append("../../devel/BerePi/apps/lcd_berepi/lib")
-sys.path.append("../../devel/BerePi/apps/BereCO2/lib")
-
 from lcd import *
+sys.path.append("../../devel/BerePi/apps/BereCO2/lib")
 from co2led import *
 
 SHT20_ADDR = 0x40       # SHT20 register address
@@ -67,9 +66,31 @@ def calc(temp, humi):
     return tmp_temp, tmp_humi
 
 def main():
+
   # Initialise display
   lcd_init()
   print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
+
+  # set logger file
+  logger = logging.getLogger(sensorname)
+  logger.setLevel(logging.DEBUG)
+  formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+  fileHandler = logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=FILEMAXBYTE,backupCount=10)
+  fileHandler.setLevel(logging.DEBUG)
+  fileHandler.setFormatter(formatter)
+  logger.addHandler(fileHandler)
+
+  # call raspi init...
+  init_process()
+  # open RASPI serial device, 38400
+  try: 
+      serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
+      in_byte = serial_in_device.read(SERIAL_READ_BYTE) 
+      pos = 0
+  except serial.SerialException, e:
+      logger.error("Serial port open error") 
+      ledall_off()
 
   while True:
     lcd_string('IP address ', LCD_LINE_1,1)
@@ -122,7 +143,60 @@ def main():
 	
     print "temp : %s\thumi : %s" % (value[0], value[1]) 
 
-    send_data(value[0],value[1])
+    time.sleep(2)
+
+    ppm = 0
+    if not (len(in_byte) is SERIAL_READ_BYTE) : 
+       logger.error("Serial packet size is strange, %d, expected size is %d" % (len(in_byte),SERIAL_READ_BYTE))
+       print 'serial byte read count error'
+       continue
+   # sometimes, 12 byte alighn is in-correct
+   # espacially run on /etc/rc.local
+    if not in_byte[9] is 'm':
+        shift_byte = checkAlignment(in_byte)
+        in_byte = shift_byte
+        if ('ppm' in in_byte):
+            if not (in_byte[2] is ' ') :
+                ppm += (int(in_byte[2])) * 1000
+            if not (in_byte[3] is ' ') :
+                ppm += (int(in_byte[3])) * 100
+            if not (in_byte[4] is ' ') :
+                ppm += (int(in_byte[4])) * 10
+            if not (in_byte[5] is ' ') :
+                ppm += (int(in_byte[5]))  
+
+        logline = sensorname + ' CO2 Level is '+ str(ppm) + ' ppm' 
+        ledall_off()
+	    
+        lcd_string('CO2 :%d ' %ppm,LCD_LINE_1,1)
+
+        if DEBUG_PRINT :
+             print logline
+
+        if ppm > 2100 : 
+             logger.error("%s", logline)
+             # cancel insert data into DB, skip.... since PPM is too high,
+             # it's abnormal in indoor buidling
+             ledred_on()
+             ### maybe change to BLINK RED, later
+             continue
+        else :
+             logger.info("%s", logline)
+
+	if ppm < 800 :  
+            ledblue_on()
+        elif ppm < 1000 :  
+            ledbluegreen_on()
+        elif ppm < 1300 :  
+            ledgreen_on()
+        elif ppm < 1600:  
+            ledwhite_on()
+        elif ppm < 1900:  
+            ledyellow_on()
+        elif ppm >= 1900 :  
+            ledpurple_on()
+
+    #send_data(value[0],value[1],ppm)
     time.sleep(2)	
 	
 def run_cmd(cmd):
@@ -182,14 +256,13 @@ def send_data(temp, humi,ppm) :
   
     data = {
 		"metric":"rc1.co2.ppm",
-		"timestamp"" : time.time(),
-		"value" : ppm,
+		"timestamp" : time.time(),
+		"value" : float(ppm),
 		"tags" : {
 			"host" : "hyunhwa"
 		}
     }
     ret = requests.post(url, data=json.dumps(data))
-
     print ret.text
  	
 def getHwAddr(ifname):
@@ -243,19 +316,6 @@ def init_process():
     ledall_off()
 
 if __name__ == '__main__':
-
- # set logger file
-    logger = logging.getLogger(sensorname)
-    logger.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-    fileHandler = logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=FILEMAXBYTE,backupCount=10)
-    fileHandler.setLevel(logging.DEBUG)
-    fileHandler.setFormatter(formatter)
-    logger.addHandler(fileHandler)
-
-    # call raspi init...
-    init_process()
 
   try:
     main()
