@@ -64,30 +64,9 @@ def calc(temp, humi):
     tmp_humi = -6 + 125 * float(humi) / pow(2,16)
 
     return tmp_temp, tmp_humi
-
-def main():
-
-  # Initialise display
-  lcd_init()
-  print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
-
-  # set logger file
-  logger = logging.getLogger(sensorname)
-  logger.setLevel(logging.DEBUG)
-  formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-  fileHandler = logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=FILEMAXBYTE,backupCount=10)
-  fileHandler.setLevel(logging.DEBUG)
-  fileHandler.setFormatter(formatter)
-  logger.addHandler(fileHandler)
-
-  # call raspi init...
-  init_process()
-  # open RASPI serial device, 38400
-  try: 
+def ip_addr():
+   try: 
       serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
-      in_byte = serial_in_device.read(SERIAL_READ_BYTE) 
-      pos = 0
   except serial.SerialException, e:
       logger.error("Serial port open error") 
       ledall_off()
@@ -121,8 +100,9 @@ def main():
     lcd_string('sTalk Channel' ,LCD_LINE_1,1)
     lcd_string('%s           ' % (str),LCD_LINE_2,1)
     red_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 5 second delay
-
+    time.sleep(2)
+    
+def tem_humi():
     temp = reading(1)
     humi = reading(2)
     if not temp or not humi:
@@ -144,9 +124,30 @@ def main():
     print "temp : %s\thumi : %s" % (value[0], value[1]) 
 
     time.sleep(2)
+    return value[0],value[1]
 
-    ppm = 0
-    if not (len(in_byte) is SERIAL_READ_BYTE) : 
+def CO2():
+  # set logger file
+  logger = logging.getLogger(sensorname)
+  logger.setLevel(logging.DEBUG)
+  formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+  fileHandler = logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=FILEMAXBYTE,backupCount=10)
+  fileHandler.setLevel(logging.DEBUG)
+  fileHandler.setFormatter(formatter)
+  logger.addHandler(fileHandler)
+
+  # call raspi init...
+  init_process()
+  # open RASPI serial device, 38400
+    try: 
+        serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
+    except serial.SerialException, e:
+        logger.error("Serial port open error") 
+        ledall_off()
+    while True:
+        ppm = 0
+        if not (len(in_byte) is SERIAL_READ_BYTE) : 
        logger.error("Serial packet size is strange, %d, expected size is %d" % (len(in_byte),SERIAL_READ_BYTE))
        print 'serial byte read count error'
        continue
@@ -195,9 +196,21 @@ def main():
             ledyellow_on()
         elif ppm >= 1900 :  
             ledpurple_on()
-
-    #send_data(value[0],value[1],ppm)
-    time.sleep(2)	
+        time.sleep(2)
+        
+        return ppm
+        
+def main():
+  # Initialise display
+  lcd_init()
+  print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
+  while True :
+  	value=tem_humi()
+  	tem=value[0]
+  	humi=value[1]
+  	ppm=CO2()
+    	send_data(tem,humi,ppm)
+    	time.sleep(2)	
 	
 def run_cmd(cmd):
     p = Popen(cmd, shell=True, stdout=PIPE)
@@ -257,7 +270,7 @@ def send_data(temp, humi,ppm) :
     data = {
 		"metric":"rc1.co2.ppm",
 		"timestamp" : time.time(),
-		"value" : float(ppm),
+		"value" : ppm,
 		"tags" : {
 			"host" : "hyunhwa"
 		}
