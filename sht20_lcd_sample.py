@@ -65,81 +65,81 @@ def calc(temp, humi):
 
     return tmp_temp, tmp_humi
 def ip_addr():
-   try: 
-      serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
-  except serial.SerialException, e:
-      logger.error("Serial port open error") 
-      ledall_off()
+    try: 
+        serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
+    except serial.SerialException, e:
+        logger.error("Serial port open error") 
+        ledall_off()
 
-  while True:
-    lcd_string('IP address ', LCD_LINE_1,1)
-    lcd_string('MAC eth0, wlan0',LCD_LINE_2,1)
-    blue_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 3 second delay
+    while True:
+      lcd_string('IP address ', LCD_LINE_1,1)
+      lcd_string('MAC eth0, wlan0',LCD_LINE_2,1)
+      blue_backlight(False) #turn on, yellow
+      time.sleep(2.5) # 3 second delay
 
-    str = ip_chk()
-    str = str[:-1]
-    lcd_string('%s ET' %str,LCD_LINE_1,1)
-    str = mac_chk()
-    str = str[:-1]
-    lcd_string('%s' % (str),LCD_LINE_2,1)
-    red_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 3 second delay
+      str = ip_chk()
+      str = str[:-1]
+      lcd_string('%s ET' %str,LCD_LINE_1,1)
+      str = mac_chk()
+      str = str[:-1]
+      lcd_string('%s' % (str),LCD_LINE_2,1)
+      red_backlight(False) #turn on, yellow
+      time.sleep(2.5) # 3 second delay
 
-    str = wip_chk()
-    str = str[:-1]
-    lcd_string('%s WL     ' % (str),LCD_LINE_1,1)
-    str = wmac_chk()
-    str = str[:-1]
-    lcd_string('%s' % (str),LCD_LINE_2,1)
-    green_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 5 second delay
+      str = wip_chk()
+      str = str[:-1]
+      lcd_string('%s WL     ' % (str),LCD_LINE_1,1)
+      str = wmac_chk()
+      str = str[:-1]
+      lcd_string('%s' % (str),LCD_LINE_2,1)
+      green_backlight(False) #turn on, yellow
+      time.sleep(2.5) # 5 second delay
         
-    str = stalk_chk()
-    str = str[:-1]
-    lcd_string('sTalk Channel' ,LCD_LINE_1,1)
-    lcd_string('%s           ' % (str),LCD_LINE_2,1)
-    red_backlight(False) #turn on, yellow
-    time.sleep(2)
+      str = stalk_chk()
+      str = str[:-1]
+      lcd_string('sTalk Channel' ,LCD_LINE_1,1)
+      lcd_string('%s           ' % (str),LCD_LINE_2,1)
+      red_backlight(False) #turn on, yellow
+      time.sleep(2)
     
 def tem_humi():
-    temp = reading(1)
-    humi = reading(2)
-    if not temp or not humi:
-    	print "register error"
-    	break
-    value = calc(temp, humi)
-    lcd_string('temp : %s ' %value[0],LCD_LINE_1,1)
-    lcd_string('humi : %s ' %value[1],LCD_LINE_2,1)
+      temp = reading(1)
+      humi = reading(2)
+      if not temp or not humi:
+      	  print "register error"
+    	  break
+      value = calc(temp, humi)
+      lcd_string('temp : %s ' %value[0],LCD_LINE_1,1)
+      lcd_string('humi : %s ' %value[1],LCD_LINE_2,1)
 
-    if float(value[0])< 22 :
-	blueLCDon()
-    elif float(value[0]) < 27 : 
-	greenLCDon()
-    elif float(value[0]) < 29 :
-	yellowLCDon()
-    else :
-	redLCDon()
+      if float(value[0])< 22 :
+  	  blueLCDon()
+      elif float(value[0]) < 27 : 
+	  greenLCDon()
+      elif float(value[0]) < 29 :
+	  yellowLCDon()
+      else :
+	  redLCDon()
 	
-    print "temp : %s\thumi : %s" % (value[0], value[1]) 
+      print "temp : %s\thumi : %s" % (value[0], value[1]) 
 
-    time.sleep(2)
-    return value[0],value[1]
+      time.sleep(2)
+      return value[0],value[1]
 
 def CO2():
-  # set logger file
-  logger = logging.getLogger(sensorname)
-  logger.setLevel(logging.DEBUG)
-  formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    # set logger file
+    logger = logging.getLogger(sensorname)
+    logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-  fileHandler = logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=FILEMAXBYTE,backupCount=10)
-  fileHandler.setLevel(logging.DEBUG)
-  fileHandler.setFormatter(formatter)
-  logger.addHandler(fileHandler)
+    fileHandler = logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=FILEMAXBYTE,backupCount=10)
+    fileHandler.setLevel(logging.DEBUG)
+    fileHandler.setFormatter(formatter)
+    logger.addHandler(fileHandler)
 
-  # call raspi init...
-  init_process()
-  # open RASPI serial device, 38400
+    # call raspi init...
+    init_process()
+    # open RASPI serial device, 38400
     try: 
         serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
     except serial.SerialException, e:
@@ -148,11 +148,11 @@ def CO2():
     while True:
         ppm = 0
         if not (len(in_byte) is SERIAL_READ_BYTE) : 
-       logger.error("Serial packet size is strange, %d, expected size is %d" % (len(in_byte),SERIAL_READ_BYTE))
-       print 'serial byte read count error'
-       continue
-   # sometimes, 12 byte alighn is in-correct
-   # espacially run on /etc/rc.local
+        logger.error("Serial packet size is strange, %d, expected size is %d" % (len(in_byte),SERIAL_READ_BYTE))
+        print 'serial byte read count error'
+        continue
+    # sometimes, 12 byte alighn is in-correct
+    # espacially run on /etc/rc.local
     if not in_byte[9] is 'm':
         shift_byte = checkAlignment(in_byte)
         in_byte = shift_byte
@@ -201,10 +201,10 @@ def CO2():
         return ppm
         
 def main():
-  # Initialise display
-  lcd_init()
-  print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
-  while True :
+    # Initialise display
+    lcd_init()
+    print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
+    while True :
   	value=tem_humi()
   	tem=value[0]
   	humi=value[1]
