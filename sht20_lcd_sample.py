@@ -42,6 +42,7 @@ CO2LED_RED_PIN = 27
 # important, sensorname shuould be pre-defined, unique sensorname
 sensorname = "co2.test"
 
+serial_in_device = 0
 ############temperature, humidity######################### 
 def reading(v):
     bus.write_quick(SHT20_ADDR)
