@@ -207,13 +207,6 @@ def init_process():
 
 def CO2():
     ppm = 0 
-    
-    # open RASPI serial device, 38400
-    try: 
-        serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
-    except serial.SerialException, e:
-        logger.error("Serial port open error") 
-        ledall_off()
     try:
         in_byte = serial_in_device.read(SERIAL_READ_BYTE) 
         pos = 0
@@ -326,6 +319,13 @@ def main():
     # call raspi init...
     init_process()
     
+     # open RASPI serial device, 38400
+    try: 
+        serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
+    except serial.SerialException, e:
+        logger.error("Serial port open error") 
+        ledall_off()
+        
     # Initialise display
     lcd_init()
     print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
