@@ -254,6 +254,7 @@ def CO2():
             ledall_off()
 	    
             lcd_string('CO2 :%d ' %ppm,LCD_LINE_1,1)
+	    lcd_string('',LCD_LINE_2,1)
 
             if DEBUG_PRINT :
                 print logline
@@ -333,7 +334,7 @@ def main():
   	tem=value[0]
   	humi=value[1]
   	ppm=CO2()
-#    	send_data(tem,humi,ppm)
+    	send_data(tem,humi,ppm)
     	time.sleep(2)	
 	
 if __name__ == '__main__':
