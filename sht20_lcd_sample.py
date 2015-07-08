@@ -42,6 +42,7 @@ CO2LED_RED_PIN = 27
 
 # important, sensorname shuould be pre-defined, unique sensorname
 sensorname = "co2.test"
+logger = logging.getLogger(sensorname)
 
 ##### open RASPI serial device, 38400#########
 try: 
@@ -309,7 +310,6 @@ def send_data(temp, humi,ppm) :
 ############## main ############################    
 def main():
      # set logger file
-    logger = logging.getLogger(sensorname)
     logger.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
