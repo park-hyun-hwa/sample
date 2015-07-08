@@ -20,11 +20,12 @@ sys.path.append("../../devel/BerePi/apps/lcd_berepi/lib")
 from lcd import *
 sys.path.append("../../devel/BerePi/apps/BereCO2/lib")
 from co2led import *
+
 ##### SHT20 define####
-SHT20_ADDR = 0x40       # SHT20 register address
-SHT20_CMD_R_T = 0xF3    # no hold Master Mode (Temperature)
-SHT20_CMD_R_RH = 0xF5   # no hold Master Mode (Humidity)
-SHT20_CMD_RESET = 0xFE  # soft reset
+SHT20_ADDR = 0x40       # SHT20 register address => 1000 0000
+SHT20_CMD_R_T = 0xF3    # no hold Master Mode (Temperature) => 1111 0011
+SHT20_CMD_R_RH = 0xF5   # no hold Master Mode (Humidity) => 1111 0101
+SHT20_CMD_RESET = 0xFE  # soft reset => 1111 1110
 
 bus = smbus.SMBus(1)    # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)
 
@@ -36,9 +37,9 @@ SERIAL_READ_BYTE = 12
 FILEMAXBYTE = 1024 * 1024 * 100 #100MB
 LOG_PATH = '/home/pi/log_tos.log'
 
-CO2LED_BLUE_PIN = 17
-CO2LED_GREEN_PIN = 22
-CO2LED_RED_PIN = 27
+#CO2LED_BLUE_PIN = 17
+#CO2LED_GREEN_PIN = 22
+#CO2LED_RED_PIN = 27
 
 # important, sensorname shuould be pre-defined, unique sensorname
 sensorname = "co2.test"
@@ -237,7 +238,7 @@ def CO2():
             logline = sensorname + ' CO2 Level is '+ str(ppm) + ' ppm' 
             ledall_off()
 	    
-            lcd_string('CO2 :%d ' %ppm,LCD_LINE_1,1)
+            lcd_string('CO2 : %d ' %ppm,LCD_LINE_1,1)
 	    lcd_string('',LCD_LINE_2,1)
 
             if DEBUG_PRINT :
@@ -332,7 +333,6 @@ def main():
   	humi=value[1]
   	ppm=CO2()
     	send_data(tem,humi,ppm)
-    	time.sleep(2)	
 	
 if __name__ == '__main__':
   try:
