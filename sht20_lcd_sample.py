@@ -42,7 +42,7 @@ CO2LED_RED_PIN = 27
 # important, sensorname shuould be pre-defined, unique sensorname
 sensorname = "co2.test"
 
-#temperature, humidity 
+############temperature, humidity######################### 
 def reading(v):
     bus.write_quick(SHT20_ADDR)
     if v == 1:
@@ -87,7 +87,7 @@ def tem_humi():
     time.sleep(2)
     return value[0],value[1]
 
-#ip_address
+####################ip_address######################
 def run_cmd(cmd):
     p = Popen(cmd, shell=True, stdout=PIPE)
     output = p.communicate()[0]
@@ -154,7 +154,7 @@ def ip_addr():
     red_backlight(False) #turn on, yellow
     time.sleep(2)
 
-#CO2
+#####################CO2########################
 def getHwAddr(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', ifname[:15]))
@@ -207,18 +207,6 @@ def init_process():
 
 def CO2():
     ppm = 0 
-    # set logger file
-    logger = logging.getLogger(sensorname)
-    logger.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-    fileHandler = logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=FILEMAXBYTE,backupCount=10)
-    fileHandler.setLevel(logging.DEBUG)
-    fileHandler.setFormatter(formatter)
-    logger.addHandler(fileHandler)
-
-    # call raspi init...
-    init_process()
     
     # open RASPI serial device, 38400
     try: 
@@ -285,7 +273,7 @@ def CO2():
         
     return ppm
 
-#send data to db
+##################send data to db#####################
 def send_data(temp, humi,ppm) :
     url = "http://10.255.252.132:4242/api/put"
     data = {
@@ -324,20 +312,33 @@ def send_data(temp, humi,ppm) :
     print ret.text
     
 def main():
+     # set logger file
+    logger = logging.getLogger(sensorname)
+    logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+    fileHandler = logging.handlers.RotatingFileHandler(LOG_PATH, maxBytes=FILEMAXBYTE,backupCount=10)
+    fileHandler.setLevel(logging.DEBUG)
+    fileHandler.setFormatter(formatter)
+    logger.addHandler(fileHandler)
+
+    # call raspi init...
+    init_process()
+    
     # Initialise display
     lcd_init()
     print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
+    
     while True :
         ip_addr()
   	value=tem_humi()
   	tem=value[0]
   	humi=value[1]
   	ppm=CO2()
-#    	send_data(tem,humi,ppm)
+    	send_data(tem,humi,ppm)
     	time.sleep(2)	
 	
 if __name__ == '__main__':
-
   try:
     main()
   except KeyboardInterrupt:
