@@ -47,7 +47,7 @@ logger = logging.getLogger(sensorname)
 
 ##### open RASPI serial device, 38400#########
 try: 
-    serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
+    serial_in_device = serial.Serial('/dev/ttyAMA0',38400) ##38400bps 
 except serial.SerialException, e:
     logger.error("Serial port open error") 
     ledall_off()
