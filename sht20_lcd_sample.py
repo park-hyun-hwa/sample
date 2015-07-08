@@ -42,6 +42,7 @@ CO2LED_RED_PIN = 27
 # important, sensorname shuould be pre-defined, unique sensorname
 sensorname = "co2.test"
 
+#temperature, humidity 
 def reading(v):
     bus.write_quick(SHT20_ADDR)
     if v == 1:
@@ -63,6 +64,97 @@ def calc(temp, humi):
 
     return tmp_temp, tmp_humi
 
+def tem_humi():
+    temp = reading(1)
+    humi = reading(2)
+    if not temp or not humi:
+        print "register error"
+    value = calc(temp, humi)
+    lcd_string('temp : %s ' %value[0],LCD_LINE_1,1)
+    lcd_string('humi : %s ' %value[1],LCD_LINE_2,1)
+
+    if float(value[0])< 22 :
+        blueLCDon()
+    elif float(value[0]) < 27 : 
+        greenLCDon()
+    elif float(value[0]) < 29 :
+        yellowLCDon()
+    else :
+        redLCDon()
+	
+    print "temp : %s\thumi : %s" % (value[0], value[1]) 
+
+    time.sleep(2)
+    return value[0],value[1]
+
+#ip_address
+def run_cmd(cmd):
+    p = Popen(cmd, shell=True, stdout=PIPE)
+    output = p.communicate()[0]
+    return output
+
+def ip_chk():
+    cmd = "ip addr show eth0 | grep inet | awk '{print $2}' | cut -d/ -f1"
+    ipAddr = run_cmd(cmd)
+    return ipAddr
+
+def wip_chk():
+    cmd = "ip addr show wlan0 | grep inet | awk '{print $2}' | cut -d/ -f1"
+    wipAddr = run_cmd(cmd)
+    return wipAddr
+
+def mac_chk():
+    cmd = "ifconfig -a | grep ^eth | awk '{print $5}'"
+    macAddr = run_cmd(cmd)
+    return macAddr
+
+def wmac_chk():
+    cmd = "ifconfig -a | grep ^wlan | awk '{print $5}'"
+    wmacAddr = run_cmd(cmd)
+    return wmacAddr
+
+def stalk_chk():
+    cmd = "hostname"
+    return run_cmd(cmd)
+    
+def ip_addr():
+    try: 
+        serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
+    except serial.SerialException, e:
+        logger.error("Serial port open error") 
+        ledall_off()
+
+    lcd_string('IP address ', LCD_LINE_1,1)
+    lcd_string('MAC eth0, wlan0',LCD_LINE_2,1)
+    blue_backlight(False) #turn on, yellow
+    time.sleep(2.5) # 3 second delay
+
+    str = ip_chk()
+    str = str[:-1]
+    lcd_string('%s ET' %str,LCD_LINE_1,1)
+    str = mac_chk()
+    str = str[:-1]
+    lcd_string('%s' % (str),LCD_LINE_2,1)
+    red_backlight(False) #turn on, yellow
+    time.sleep(2.5) # 3 second delay
+
+    str = wip_chk()
+    str = str[:-1]
+    lcd_string('%s WL     ' % (str),LCD_LINE_1,1)
+    str = wmac_chk()
+    str = str[:-1]
+    lcd_string('%s' % (str),LCD_LINE_2,1)
+    green_backlight(False) #turn on, yellow
+    time.sleep(2.5) # 5 second delay
+      
+    str = stalk_chk()
+    str = str[:-1]
+    lcd_string('sTalk Channel' ,LCD_LINE_1,1)
+    lcd_string('%s           ' % (str),LCD_LINE_2,1)
+    red_backlight(False) #turn on, yellow
+    time.sleep(2)
+
+#CO2
 def getHwAddr(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', ifname[:15]))
@@ -113,66 +205,6 @@ def init_process():
     print " "
     ledall_off()
 
-def ip_addr():
-    try: 
-        serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
-    except serial.SerialException, e:
-        logger.error("Serial port open error") 
-        ledall_off()
-
-    lcd_string('IP address ', LCD_LINE_1,1)
-    lcd_string('MAC eth0, wlan0',LCD_LINE_2,1)
-    blue_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 3 second delay
-
-    str = ip_chk()
-    str = str[:-1]
-    lcd_string('%s ET' %str,LCD_LINE_1,1)
-    str = mac_chk()
-    str = str[:-1]
-    lcd_string('%s' % (str),LCD_LINE_2,1)
-    red_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 3 second delay
-
-    str = wip_chk()
-    str = str[:-1]
-    lcd_string('%s WL     ' % (str),LCD_LINE_1,1)
-    str = wmac_chk()
-    str = str[:-1]
-    lcd_string('%s' % (str),LCD_LINE_2,1)
-    green_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 5 second delay
-      
-    str = stalk_chk()
-    str = str[:-1]
-    lcd_string('sTalk Channel' ,LCD_LINE_1,1)
-    lcd_string('%s           ' % (str),LCD_LINE_2,1)
-    red_backlight(False) #turn on, yellow
-    time.sleep(2)
-    
-def tem_humi():
-    temp = reading(1)
-    humi = reading(2)
-    if not temp or not humi:
-        print "register error"
-    value = calc(temp, humi)
-    lcd_string('temp : %s ' %value[0],LCD_LINE_1,1)
-    lcd_string('humi : %s ' %value[1],LCD_LINE_2,1)
-
-    if float(value[0])< 22 :
-        blueLCDon()
-    elif float(value[0]) < 27 : 
-        greenLCDon()
-    elif float(value[0]) < 29 :
-        yellowLCDon()
-    else :
-        redLCDon()
-	
-    print "temp : %s\thumi : %s" % (value[0], value[1]) 
-
-    time.sleep(2)
-    return value[0],value[1]
-
 def CO2():
     ppm = 0 
     # set logger file
@@ -187,6 +219,7 @@ def CO2():
 
     # call raspi init...
     init_process()
+    
     # open RASPI serial device, 38400
     try: 
         serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
@@ -207,8 +240,20 @@ def CO2():
     if not in_byte[9] is 'm':
         shift_byte = checkAlignment(in_byte)
         in_byte = shift_byte
-        if ('ppm' in in_byte):
-            if (in_byte[2] is ' ') :
+    if ('ppm' in in_byte):
+    	    if DEBUG_PRINT :
+                print '-----\/---------\/------ DEBUG_PRINT set -----\/---------\/------ '
+                for byte in in_byte :
+                    print "serial_in_byte[%d]: " %pos,
+                    pos += 1
+                    if ord(byte) is 0x0d :
+                        print "escape:", '0x0d'," Hex: ", byte.encode('hex')
+                        continue
+                    elif ord(byte) is 0x0a :
+                        print "escape:", '0x0a'," Hex: ", byte.encode('hex')
+                        continue
+                    print " String:", byte,  "    Hex: ", byte.encode('hex')
+            if not (in_byte[2] is ' ') :
                 ppm += (int(in_byte[2])) * 1000
             if not (in_byte[3] is ' ') :
                 ppm += (int(in_byte[3])) * 100
@@ -250,49 +295,8 @@ def CO2():
         time.sleep(2)
         
         return ppm
-        
-def main():
-    # Initialise display
-    lcd_init()
-    print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
-    while True :
-        ip_addr()
-  	value=tem_humi()
-  	tem=value[0]
-  	humi=value[1]
-  	ppm=CO2()
-#    	send_data(tem,humi,ppm)
-    	time.sleep(2)	
-	
-def run_cmd(cmd):
-    p = Popen(cmd, shell=True, stdout=PIPE)
-    output = p.communicate()[0]
-    return output
 
-def ip_chk():
-    cmd = "ip addr show eth0 | grep inet | awk '{print $2}' | cut -d/ -f1"
-    ipAddr = run_cmd(cmd)
-    return ipAddr
-
-def wip_chk():
-    cmd = "ip addr show wlan0 | grep inet | awk '{print $2}' | cut -d/ -f1"
-    wipAddr = run_cmd(cmd)
-    return wipAddr
-
-def mac_chk():
-    cmd = "ifconfig -a | grep ^eth | awk '{print $5}'"
-    macAddr = run_cmd(cmd)
-    return macAddr
-
-def wmac_chk():
-    cmd = "ifconfig -a | grep ^wlan | awk '{print $5}'"
-    wmacAddr = run_cmd(cmd)
-    return wmacAddr
-
-def stalk_chk():
-    cmd = "hostname"
-    return run_cmd(cmd)
-
+#send data to db
 def send_data(temp, humi,ppm) :
     url = "http://10.255.252.132:4242/api/put"
     data = {
@@ -329,7 +333,20 @@ def send_data(temp, humi,ppm) :
     }
     ret = requests.post(url, data=json.dumps(data))
     print ret.text
- 	
+    
+def main():
+    # Initialise display
+    lcd_init()
+    print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
+    while True :
+        ip_addr()
+  	value=tem_humi()
+  	tem=value[0]
+  	humi=value[1]
+  	ppm=CO2()
+#    	send_data(tem,humi,ppm)
+    	time.sleep(2)	
+	
 if __name__ == '__main__':
 
   try:
