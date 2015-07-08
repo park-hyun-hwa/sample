@@ -241,19 +241,7 @@ def CO2():
         shift_byte = checkAlignment(in_byte)
         in_byte = shift_byte
     if ('ppm' in in_byte):
-    	    if DEBUG_PRINT :
-                print '-----\/---------\/------ DEBUG_PRINT set -----\/---------\/------ '
-                for byte in in_byte :
-                    print "serial_in_byte[%d]: " %pos,
-                    pos += 1
-                    if ord(byte) is 0x0d :
-                        print "escape:", '0x0d'," Hex: ", byte.encode('hex')
-                        continue
-                    elif ord(byte) is 0x0a :
-                        print "escape:", '0x0a'," Hex: ", byte.encode('hex')
-                        continue
-                    print " String:", byte,  "    Hex: ", byte.encode('hex')
-            if not (in_byte[2] is ' ') :
+            if not(in_byte[2] is ' ') :
                 ppm += (int(in_byte[2])) * 1000
             if not (in_byte[3] is ' ') :
                 ppm += (int(in_byte[3])) * 100
@@ -262,39 +250,40 @@ def CO2():
             if not (in_byte[5] is ' ') :
                 ppm += (int(in_byte[5]))  
 
-        logline = sensorname + ' CO2 Level is '+ str(ppm) + ' ppm' 
-        ledall_off()
+            logline = sensorname + ' CO2 Level is '+ str(ppm) + ' ppm' 
+            ledall_off()
 	    
-        lcd_string('CO2 :%d ' %ppm,LCD_LINE_1,1)
+            lcd_string('CO2 :%d ' %ppm,LCD_LINE_1,1)
 
-        if DEBUG_PRINT :
-             print logline
+            if DEBUG_PRINT :
+                print logline
 
-        if ppm > 2100 : 
-             logger.error("%s", logline)
-             # cancel insert data into DB, skip.... since PPM is too high,
-             # it's abnormal in indoor buidling
-             ledred_on()
-             ### maybe change to BLINK RED, later
-             return -1
-        else :
-             logger.info("%s", logline)
+            if ppm > 2100 : 
+                logger.error("%s", logline)
+                # cancel insert data into DB, skip.... since PPM is too high,
+                # it's abnormal in indoor buidling
+                ledred_on()
+                ### maybe change to BLINK RED, later
+                return -1
+            else :
+                logger.info("%s", logline)
 
-	if ppm < 800 :  
-            ledblue_on()
-        elif ppm < 1000 :  
-            ledbluegreen_on()
-        elif ppm < 1300 :  
-            ledgreen_on()
-        elif ppm < 1600:  
-            ledwhite_on()
-        elif ppm < 1900:  
-            ledyellow_on()
-        elif ppm >= 1900 :  
-            ledpurple_on()
-        time.sleep(2)
+    if ppm < 800 :  
+        ledblue_on()
+    elif ppm < 1000 :  
+        ledbluegreen_on()
+    elif ppm < 1300 :  
+        ledgreen_on()
+    elif ppm < 1600:  
+        ledwhite_on()
+    elif ppm < 1900:  
+        ledyellow_on()
+    elif ppm >= 1900 :  
+        ledpurple_on()
+    
+    time.sleep(2)
         
-        return ppm
+    return ppm
 
 #send data to db
 def send_data(temp, humi,ppm) :
