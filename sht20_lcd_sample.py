@@ -20,7 +20,7 @@ sys.path.append("../../devel/BerePi/apps/lcd_berepi/lib")
 from lcd import *
 sys.path.append("../../devel/BerePi/apps/BereCO2/lib")
 from co2led import *
-
+##### SHT20 define####
 SHT20_ADDR = 0x40       # SHT20 register address
 SHT20_CMD_R_T = 0xF3    # no hold Master Mode (Temperature)
 SHT20_CMD_R_RH = 0xF5   # no hold Master Mode (Humidity)
@@ -28,6 +28,7 @@ SHT20_CMD_RESET = 0xFE  # soft reset
 
 bus = smbus.SMBus(1)    # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)
 
+##### CO2 define#####
 ppm = 0
 
 DEBUG_PRINT = 1
@@ -42,7 +43,13 @@ CO2LED_RED_PIN = 27
 # important, sensorname shuould be pre-defined, unique sensorname
 sensorname = "co2.test"
 
-serial_in_device = 0
+##### open RASPI serial device, 38400#########
+    try: 
+        serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
+    except serial.SerialException, e:
+        logger.error("Serial port open error") 
+        ledall_off()
+        
 ############temperature, humidity######################### 
 def reading(v):
     bus.write_quick(SHT20_ADDR)
@@ -119,12 +126,6 @@ def stalk_chk():
     return run_cmd(cmd)
     
 def ip_addr():
-    try: 
-        serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
-    except serial.SerialException, e:
-        logger.error("Serial port open error") 
-        ledall_off()
-
     lcd_string('IP address ', LCD_LINE_1,1)
     lcd_string('MAC eth0, wlan0',LCD_LINE_2,1)
     blue_backlight(False) #turn on, yellow
@@ -305,7 +306,7 @@ def send_data(temp, humi,ppm) :
     }
     ret = requests.post(url, data=json.dumps(data))
     print ret.text
-    
+############## main ############################    
 def main():
      # set logger file
     logger = logging.getLogger(sensorname)
@@ -319,14 +320,7 @@ def main():
 
     # call raspi init...
     init_process()
-    
-     # open RASPI serial device, 38400
-    try: 
-        serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
-    except serial.SerialException, e:
-        logger.error("Serial port open error") 
-        ledall_off()
-        
+ 
     # Initialise display
     lcd_init()
     print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
