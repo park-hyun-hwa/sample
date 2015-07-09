@@ -94,10 +94,21 @@ def getState(light):
 	
 	return ret
 
-def random_colors():
-	state = getState(1)
+def print_state(light):
+	state = getState(light)
+	print "name : "+ret[0]
+	print "on : "+ret[1]
+	print "bri : "+ret[2]
+	print "hue : "+ret[3]
+	print "sat : "+ret[4]
 	
 if __name__ == '__main__':
+	
+	print_state(1)
+	
 	off(1)
 	time.sleep(1)
-
+	on(1)
+	time.sleep(1)
+	
+	
