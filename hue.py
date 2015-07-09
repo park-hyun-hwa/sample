@@ -117,8 +117,8 @@ def select_menu():
 	print "****************************"
 	print " "
 	
-	menu = input("Please select the menu.")
-	hue_num = input("Please enter the Hue number that you want to control.")
+	menu = raw_input("Please select the menu.")
+	hue_num = raw_input("Please enter the Hue number that you want to control.")
 	
 	state = getState(hue_num)
 	
