@@ -103,7 +103,7 @@ def print_state(light):
 	print "sat : "+str(state[4])
 	
 if __name__ == '__main__':
-	state = get_state(1)
+	state = getState(1)
 	print_state(1)
 	
 	print str(state[0])+" is off"
