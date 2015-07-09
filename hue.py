@@ -93,3 +93,12 @@ def getState(light):
 	ret.append(data['state']['sat'])
 	
 	return ret
+
+def random_colors():
+	state = getState(1)
+	
+if __name__ == '__main__':
+	off(1)
+	time.sleep(1)
+	on(1)
+	time.sleep(1)
