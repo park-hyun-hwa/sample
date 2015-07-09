@@ -47,7 +47,7 @@ logger = logging.getLogger(sensorname)
 
 ##### open RASPI serial device, 38400#########
 try: 
-    serial_in_device = serial.Serial('/dev/ttyAMA0',38400)
+    serial_in_device = serial.Serial('/dev/ttyAMA0',38400) ##38400bps 
 except serial.SerialException, e:
     logger.error("Serial port open error") 
     ledall_off()
@@ -131,7 +131,7 @@ def ip_addr():
     lcd_string('IP address ', LCD_LINE_1,1)
     lcd_string('MAC eth0, wlan0',LCD_LINE_2,1)
     blue_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 3 second delay
+    time.sleep(2) 
 
     str = ip_chk()
     str = str[:-1]
@@ -140,7 +140,7 @@ def ip_addr():
     str = str[:-1]
     lcd_string('%s' % (str),LCD_LINE_2,1)
     red_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 3 second delay
+    time.sleep(2) 
 
     str = wip_chk()
     str = str[:-1]
@@ -149,7 +149,7 @@ def ip_addr():
     str = str[:-1]
     lcd_string('%s' % (str),LCD_LINE_2,1)
     green_backlight(False) #turn on, yellow
-    time.sleep(2.5) # 5 second delay
+    time.sleep(2) 
       
     str = stalk_chk()
     str = str[:-1]
