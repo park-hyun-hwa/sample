@@ -7,7 +7,7 @@ import sys
  
  
 # 호스트, 포트와 버퍼 사이즈를 지정
-HOST = '127.0.0.1'
+HOST = '10.255.254.227'
 PORT = 56789
 BUFSIZE = 1024
 ADDR = (HOST, PORT)
