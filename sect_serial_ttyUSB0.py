@@ -169,7 +169,7 @@ def sese(s):
 			
 if __name__ == '__main__':
 
-	test = serial.Serial("/dev/ttyUSB0", 115200)
+	test = serial.Serial("/dev/ttyUSB0")
 	tmpPkt = []
 	flag =0
 
