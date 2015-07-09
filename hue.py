@@ -147,7 +147,7 @@ def select_menu():
 	else:
 		print_state(hue_num)	
 if __name__ == '__main__':
-	whle True:
+	while True:
 		select_menu()
 	
 	
