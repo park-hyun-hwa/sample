@@ -107,16 +107,16 @@ def print_state(light):
 
 def select_menu():
 	print "*****************************"
-	print "1. 끄기"
-	print "2. 켜기"
-	print "3. 색 랜덤하게 바꾸기"
-	print "4. 빛 밝기 바꾸기"
-	print "5. 빛 채도 바꾸기"
-	print "6. Hue 상태 보기"
+	print "1. turn off"
+	print "2. turn on"
+	print "3. Change the color random"
+	print "4. change the brightness of the light"
+	print "5. change the saturation of the light"
+	print "6. Hue state"
 	print "****************************"
 	
-	menu = input("메뉴를 선택하시오.")
-	hue_num = input("제어 할 Hue 번호를 입력하시오.")
+	menu = input("Please select the menu.")
+	hue_num = input("Please enter the Hue number that you want to control.")
 	
 	state = getState(hue_num)
 	
@@ -132,14 +132,14 @@ def select_menu():
 		print str(state[0])+"'s color is randomly changed"
 	elif menu==4:
 		print "Current brightness is "+str(state[2])
-		bri_val = input("밝기를 입력하시오.")
+		bri_val = input("Please enter the brightness.")
 		if (bri_val is ' '):
 			return -1
 		putBri(hue_num, bri_val)
 		print str(state[0])+"'s brightness is changed"	
 	elif menu==5:
 		print "Current saturation is "+str(state[4])
-		sat_val = input("채도를 입력하시오.")
+		sat_val = input("Please enter the saturation.")
 		if (sat_val is ' '):
 			return -1
 		putSat(hue_num, sat_val)
@@ -147,8 +147,12 @@ def select_menu():
 	else:
 		print_state(hue_num)	
 if __name__ == '__main__':
-	while True:
-		select_menu()
+	try:
+		while True:
+			select_menu()
+  	except KeyboardInterrupt:
+  		pass
+	
 	
 	
 
