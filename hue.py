@@ -96,11 +96,11 @@ def getState(light):
 
 def print_state(light):
 	state = getState(light)
-	print "name : "+ret[0]
-	print "on : "+ret[1]
-	print "bri : "+ret[2]
-	print "hue : "+ret[3]
-	print "sat : "+ret[4]
+	print "name : "+state[0]
+	print "on : "+state[1]
+	print "bri : "+state[2]
+	print "hue : "+state[3]
+	print "sat : "+state[4]
 	
 if __name__ == '__main__':
 	
