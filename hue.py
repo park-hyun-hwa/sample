@@ -114,6 +114,7 @@ def select_menu():
 	print "4. change the brightness of the light"
 	print "5. change the saturation of the light"
 	print "6. Hue state"
+	print "7. close"
 	print "****************************"
 	print " "
 	
@@ -146,8 +147,11 @@ def select_menu():
 			return -1
 		putSat(hue_num, sat_val)
 		print str(state[0])+"'s brightness is changed"
-	else:
+	elif menu==6:
 		print_state(hue_num)	
+	else :
+		return -1
+		
 if __name__ == '__main__':
 	try:
 		while True:
