@@ -133,14 +133,14 @@ def select_menu():
 	elif menu==4:
 		print "Current brightness is "+str(state[2])
 		bri_val = input("밝기를 입력하시오.")
-		if (bri_val is ' ')
+		if (bri_val is ' '):
 			return -1
 		putBri(hue_num, bri_val)
 		print str(state[0])+"'s brightness is changed"	
 	elif menu==5:
 		print "Current saturation is "+str(state[4])
 		sat_val = input("채도를 입력하시오.")
-		if (sat_val is ' ')
+		if (sat_val is ' '):
 			return -1
 		putSat(hue_num, sat_val)
 		print str(state[0])+"'s brightness is changed"
