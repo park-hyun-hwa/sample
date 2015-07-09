@@ -99,26 +99,57 @@ def print_state(light):
 	state = getState(light)
 	print "name : "+str(state[0])
 	print "on : "+str(state[1])
-	print "bri : "+str(state[2])
-	print "hue : "+str(state[3])
-	print "sat : "+str(state[4])
+	print "brightness : "+str(state[2])
+	print "color : "+str(state[3])
+	print "saturation : "+str(state[4])
 	print "xy : "+str(state[5])
 	print ""
+
+def select_menu():
+	print "*****************************"
+	print "1. 끄기"
+	print "2. 켜기"
+	print "3. 색 랜덤하게 바꾸기"
+	print "4. 빛 밝기 바꾸기"
+	print "5. 빛 채도 바꾸기"
+	print "6. Hue 상태 보기"
+	print "****************************"
 	
+	menu = input("메뉴를 선택하시오.")
+	hue_num = input("제어 할 Hue 번호를 입력하시오.")
+	
+	state = getState(hue_num)
+	
+	if menu==1:
+		off(1)
+		print str(state[0])+" is off"
+	elif menu==2:
+		on(1)
+		print str(state[0])+" is on"
+	elif menu==3:
+		random = random.randrange(0,65535) #0~65535 사이의 정수 랜덤으로 출력
+		putHue(hue_num,random)
+		print str(state[0])+"'s color is randomly changed"
+	elif menu==4:
+		print "Current brightness is "+str(state[2])
+		bri_val = input("밝기를 입력하시오.")
+		if not bri_val
+			return -1
+		putBri(hue_num, bri_val)
+		print str(state[0])+"'s brightness is changed"	
+	elif menu==5:
+		print "Current saturation is "+str(state[4])
+		sat_val = input("채도를 입력하시오.")
+		if not sat_val
+			return -1
+		putSat(hue_num, sat_val)
+		print str(state[0])+"'s brightness is changed"
+	else:
+		print_state(hue_num)	
 if __name__ == '__main__':
-	######hue 상태 가져오기######
-	"""state = getState(1)
-	print_state(1)
-	##### hue 끄기 #####
-	print str(state[0])+" is off"
-	off(1)
-	time.sleep(5)
-	#### hue 켜기 #####
-	print str(state[0])+" is on"
-	on(1)
-	time.sleep(5)
-	##### hue 색 랜덤하게 변경 #####
-	print str(state[0])+"'s color is randomly changed"
-	random = random.randrange(0,65535) #0~65535 사이의 정수 랜덤으로 출력
-	putHue(1,random)
-	"""
+	whle True:
+		select_menu()
+	
+	
+
+	
