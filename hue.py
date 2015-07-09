@@ -103,21 +103,23 @@ def print_state(light):
 	print "hue : "+str(state[3])
 	print "sat : "+str(state[4])
 	print "xy : "+str(state[5])
+	print ""
 	
 if __name__ == '__main__':
+	"
+	######hue 상태 가져오기######
 	state = getState(1)
 	print_state(1)
-	
+	##### hue 끄기 #####
 	print str(state[0])+" is off"
 	off(1)
 	time.sleep(5)
-	
+	#### hue 켜기 #####
 	print str(state[0])+" is on"
 	on(1)
 	time.sleep(5)
-	
+	##### hue 색 랜덤하게 변경 #####
 	print str(state[0])+"'s color is randomly changed"
-	random = random.randint(0,65535)
-	print random
+	random = random.randrange(0,65535) #0~65535 사이의 정수 랜덤으로 출력
 	putHue(1,random)
-	
+	"
