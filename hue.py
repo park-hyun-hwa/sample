@@ -127,8 +127,8 @@ def select_menu():
 		on(1)
 		print str(state[0])+" is on"
 	elif menu==3:
-		random = random.randrange(0,65535) #0~65535 사이의 정수 랜덤으로 출력
-		putHue(hue_num,random)
+		random_bri = random.randrange(0,65535) #0~65535 사이의 정수 랜덤으로 출력
+		putHue(hue_num,random_bri)
 		print str(state[0])+"'s color is randomly changed"
 	elif menu==4:
 		print "Current brightness is "+str(state[2])
