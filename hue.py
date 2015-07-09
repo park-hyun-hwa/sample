@@ -106,6 +106,7 @@ def print_state(light):
 	print ""
 
 def select_menu():
+	print " "
 	print "*****************************"
 	print "1. turn off"
 	print "2. turn on"
@@ -114,6 +115,7 @@ def select_menu():
 	print "5. change the saturation of the light"
 	print "6. Hue state"
 	print "****************************"
+	print " "
 	
 	menu = input("Please select the menu.")
 	hue_num = input("Please enter the Hue number that you want to control.")
