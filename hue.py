@@ -4,7 +4,7 @@ import httplib
 import time
 import json
 
-conn = httplib.HTTPConnection("rasp2.iptime.org:8081")
+conn = httplib.HTTPConnection("10.255.255.65:8081")
 
 #Hue 켜기
 def on(light):
