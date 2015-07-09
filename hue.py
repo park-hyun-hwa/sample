@@ -126,20 +126,24 @@ def select_menu():
 	if menu==1:
 		off(1)
 		print str(state[0])+" is off"
+		time.sleep(2)
 	elif menu==2:
 		on(1)
 		print str(state[0])+" is on"
+		time.sleep(2)
 	elif menu==3:
 		random_bri = random.randrange(0,65535) #0~65535 사이의 정수 랜덤으로 출력
 		putHue(hue_num,random_bri)
 		print str(state[0])+"'s color is randomly changed"
+		time.sleep(2)
 	elif menu==4:
 		print "Current brightness is "+str(state[2])
 		bri_val = raw_input("Please enter the brightness.")
 		if (bri_val is ' '):
-			return -1
+			break
 		putBri(hue_num, bri_val)
 		print str(state[0])+"'s brightness is changed"	
+		time.sleep(2)
 	elif menu==5:
 		print "Current saturation is "+str(state[4])
 		sat_val = raw_input("Please enter the saturation.")
@@ -147,10 +151,12 @@ def select_menu():
 			return -1
 		putSat(hue_num, sat_val)
 		print str(state[0])+"'s brightness is changed"
+		time.sleep(2)
 	elif menu==6:
-		print_state(hue_num)	
+		print_state(hue_num)
+		time.sleep(2)
 	else :
-		return -1
+		break
 		
 if __name__ == '__main__':
 	try:
