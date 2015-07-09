@@ -133,15 +133,17 @@ def select_menu():
 		putHue(hue_num,random_bri)
 		print str(state[0])+"'s color is randomly changed"
 	elif menu==4:
+		state = getState(hue_num)
 		print "Current brightness is "+str(state[2])
-		bri_val = input("Please enter the brightness.")
+		bri_val = raw_input("Please enter the brightness.")
 		if (bri_val is ' '):
 			return -1
 		putBri(hue_num, bri_val)
 		print str(state[0])+"'s brightness is changed"	
 	elif menu==5:
+		state = getState(hue_num)
 		print "Current saturation is "+str(state[4])
-		sat_val = input("Please enter the saturation.")
+		sat_val = raw_input("Please enter the saturation.")
 		if (sat_val is ' '):
 			return -1
 		putSat(hue_num, sat_val)
