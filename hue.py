@@ -91,7 +91,7 @@ def getState(light):
 	ret.append(data['state']['bri'])
 	ret.append(data['state']['hue'])
 	ret.append(data['state']['sat'])
-	
+	ret.append(data['state']['xy'])
 	return ret
 
 def print_state(light):
@@ -101,6 +101,7 @@ def print_state(light):
 	print "bri : "+str(state[2])
 	print "hue : "+str(state[3])
 	print "sat : "+str(state[4])
+	print "xy : "+str(state[5])
 	
 if __name__ == '__main__':
 	state = getState(1)
