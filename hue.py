@@ -100,5 +100,4 @@ def random_colors():
 if __name__ == '__main__':
 	off(1)
 	time.sleep(1)
-	on(1)
-	time.sleep(1)
+
