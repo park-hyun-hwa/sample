@@ -140,7 +140,7 @@ def select_menu():
 		print "Current brightness is "+str(state[2])
 		bri_val = raw_input("Please enter the brightness.")
 		if (bri_val is ' '):
-			break
+			pass
 		putBri(hue_num, bri_val)
 		print str(state[0])+"'s brightness is changed"	
 		time.sleep(2)
@@ -148,7 +148,7 @@ def select_menu():
 		print "Current saturation is "+str(state[4])
 		sat_val = raw_input("Please enter the saturation.")
 		if (sat_val is ' '):
-			return -1
+			pass
 		putSat(hue_num, sat_val)
 		print str(state[0])+"'s brightness is changed"
 		time.sleep(2)
@@ -156,7 +156,7 @@ def select_menu():
 		print_state(hue_num)
 		time.sleep(2)
 	else :
-		break
+		pass
 		
 if __name__ == '__main__':
 	try:
