@@ -117,7 +117,7 @@ if __name__ == '__main__':
 	time.sleep(5)
 	
 	print str(state[0])+"'s color is randomly changed"
-	random = random.range(0,65535)
+	random = random.randrange(0,65535)
 	print random
-	putHue(1,random.range(0,65535))
+	putHue(1,random.randrange(0,65535))
 	
