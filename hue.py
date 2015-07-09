@@ -109,10 +109,10 @@ if __name__ == '__main__':
 	
 	print str(state[0])+" is off"
 	off(1)
-	time.sleep(1)
+	time.sleep(5)
 	
 	print str(state[0])+" is on"
 	on(1)
-	time.sleep(1)
+	time.sleep(5)
 	
 	
