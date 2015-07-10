@@ -137,7 +137,8 @@ def ip_addr():
     str = str[:-1]
     str1 = mac_chk()
     str1 = str1[:-1]
-    print "length : "+str(len(str1))
+    length = len(str1)
+    print "length : "+str(length)
     if len(str1) > 16:
     	dif = len(str1)-16
     	print "dif : "+str(dif)
