@@ -51,13 +51,6 @@ def sese(s):
     nodeID = s[52:56]
     #seq = s[40:44]
     
-<<<<<<< HEAD
-    print s
-
-=======
-    print s[:]
-    """
->>>>>>> 15a50f38cbfd71da31db52580da7dc67d98bb6a0
     print "head : "+head
     print "type : "+type
     print "serialID : "+serialID
@@ -65,16 +58,14 @@ def sese(s):
     #print "seq : "+seq
     
     if type == "0064" : # TH
-        temperature = bigEndian( s[64:68] ) 
-        humidity = bigEndian( s[68:72] ) 
-        light = bigEndian( s[72:76] ) 
+        temperature = littleEndian( s[64:68] ) 
+        humidity = littleEndian( s[68:72] ) 
+        light = littleEndian( s[72:76] ) 
         
-        print "temperature : "+s[64:68]
-        print "humidity : "+s[68:72]
-        print "light : "+s[72:76]
-        print "temperature : "+str(temperature)
-        print "humidity : "+str(humidity)
-        print "light : "+str(light)
+        
+        #print "temperature : "+str(temperature)
+        #print "humidity : "+str(humidity)
+        #print "light : "+str(light)
         
         v1 = -39.6 + 0.01 * temperature 
         tmp = -4 + 0.0405 * humidity + (-0.0000028) * humidity * humidity 
@@ -87,25 +78,17 @@ def sese(s):
         print "gyu_RC1_thl.light %d %f nodeid=%d" % ( t, v3, bigEndian( nodeID ) ) 
 
     elif type == "0070" : # TH : Total Sensor
-        temperature = bigEndian( s[64:68] ) 
-        humidity = bigEndian( s[68:72] ) 
-        light = bigEndian( s[72:76] ) 
+        temperature = littleEndian( s[64:68] ) 
+        humidity = littleEndian( s[68:72] ) 
+        light = littleEndian( s[72:76] ) 
         #v1 = -46.85 + 0.01 * temperature
         #tmp = -6 + 125 * humidity / 4095
         #v2 = tmp
         tmp = (light * 1.017)
         v3 = tmp
         
-        print "temperature : "+s[64:68]
-        print "humidity : "+s[68:72]
-        print "light : "+s[72:76]
-        
-        print "temperature : "+str(temperature)
-        print "humidity : "+str(humidity)
-        print "light : "+str(light)
-        
-        v1 = -46.85 + 175.72 * float(temperature) / pow(2,16)
-    	v2 = -6 + 125 * float(humidity) / pow(2,16)
+        v1 = -46.85 + 175.72 * float(temperature) / pow(2,12)
+    	v2 = -6 + 125 * float(humidity) / pow(2,14)
         
 
         t = int(time.time())
