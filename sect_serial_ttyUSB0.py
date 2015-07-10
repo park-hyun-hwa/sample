@@ -178,7 +178,7 @@ def sese(s):
     else:
 		print >> sys.stderr, "Invalid type : " + type
 		pass
-"""			
+			
 if __name__ == '__main__':
 
 	test = serial.Serial("/dev/ttyUSB0",115200)
