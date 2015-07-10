@@ -135,10 +135,14 @@ def ip_addr():
 
     str = ip_chk()
     str = str[:-1]
-    lcd_string('%s ET' %str,LCD_LINE_1,1)
-    str = mac_chk()
-    str = str[:-1]
-    lcd_string('%s' % (str),LCD_LINE_2,1)
+    str1 = mac_chk()
+    str1 = str1[:-1]
+    if len(str1) > 16:
+    	dif = len(str1)-16
+    	for i in dif : 
+    		str1 = str1[i:15+i]
+    		lcd_string('%s ET' %str,LCD_LINE_1,1)
+    		lcd_string('%s' % (str1),LCD_LINE_2,1)
     red_backlight(False) #turn on, yellow
     time.sleep(2) 
 
