@@ -85,6 +85,10 @@ def sese(s):
         tmp = (light * 1.017)
         v3 = tmp
         
+        print "temperature : "+temperature
+        print "humidity : "+humidity
+        print "light : "+light
+        
         v1 = -46.85 + 175.72 * float(temperature) / pow(2,16)
     	v2 = -6 + 125 * float(humidity) / pow(2,16)
         
