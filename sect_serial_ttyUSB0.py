@@ -87,8 +87,8 @@ def sese(s):
         tmp = (light * 1.017)
         v3 = tmp
         
-        v1 = -46.85 + 175.72 * float(temperature) / pow(2,12)
-    	v2 = -6 + 125 * float(humidity) / pow(2,14)
+        v1 = -46.85 + 175.72 * float(temperature) / pow(2,14) # 12 (12bit) for relative humidity 
+    	v2 = -6 + 125 * float(humidity) / pow(2,12) #and 14 (14bit) for temperature.
         
 
         t = int(time.time())
