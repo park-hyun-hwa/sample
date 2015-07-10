@@ -45,22 +45,22 @@ def littleEndian(s):
 def sese(s):
 	
     head = s[:20]
-    type = s[20:24]
+    type = s[36:40]
         
-    serialID = s[24:36]
-    nodeID = s[36:40]
-    seq = s[40:44]
+    serialID = s[40:52]
+    nodeID = s[52:56]
+    #seq = s[40:44]
     
     print "head : "+head
     print "type : "+type
     print "serialID : "+serialID
     print "nodeID : "+nodeID
-    print "seq : "+seq
-    """
+    #print "seq : "+seq
+    
     if type == "0064" : # TH
-        temperature = bigEndian( s[48:52] ) 
-        humidity = bigEndian( s[52:56] ) 
-        light = bigEndian( s[56:60] ) 
+        temperature = bigEndian( s[64:68] ) 
+        humidity = bigEndian( s[68:72] ) 
+        light = bigEndian( s[72:76] ) 
         v1 = -39.6 + 0.01 * temperature 
         tmp = -4 + 0.0405 * humidity + (-0.0000028) * humidity * humidity 
         v2 = (v1 - 25) * (0.01 + 0.00008 * humidity) + tmp 
@@ -72,9 +72,9 @@ def sese(s):
         print "gyu_RC1_thl.light %d %f nodeid=%d" % ( t, v3, bigEndian( nodeID ) ) 
 
     elif type == "0070" : # TH : Total Sensor
-        temperature = bigEndian( s[48:52] ) 
-        humidity = bigEndian( s[52:56] )
-        light = bigEndian( s[56:60] )
+        temperature = bigEndian( s[64:68] ) 
+        humidity = bigEndian( s[68:72] ) 
+        light = bigEndian( s[72:76] ) 
         #v1 = -46.85 + 0.01 * temperature
         #tmp = -6 + 125 * humidity / 4095
         #v2 = tmp
@@ -172,7 +172,7 @@ def sese(s):
     else:
 		print >> sys.stderr, "Invalid type : " + type
 		pass
-"""			
+			
 if __name__ == '__main__':
 
 	test = serial.Serial("/dev/ttyUSB0",115200)
