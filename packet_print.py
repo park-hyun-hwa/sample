@@ -290,5 +290,4 @@ for i in range(len(sys.argv)):
   print "sys.argv[%d] = '%s'" % (i, sys.argv[i])
 <<<<<<< HEAD
 '''
-=======
->>>>>>> 2ce15f1d3fdd90f7c37d914f832a0e8ffb6398bc
+
