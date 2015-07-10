@@ -43,14 +43,20 @@ def littleEndian(s):
 	return res
 
 def sese(s):
-
+	
     head = s[:20]
     type = s[20:24]
         
     serialID = s[24:36]
     nodeID = s[36:40]
     seq = s[40:44]
-        
+    
+    print "head : "+head
+    print "type : "+type
+    print "serialID : "+serialID
+    print "nodeID : "+nodeID
+    print "seq : "+seq
+    """
     if type == "0064" : # TH
         temperature = bigEndian( s[48:52] ) 
         humidity = bigEndian( s[52:56] ) 
@@ -195,3 +201,4 @@ if __name__ == '__main__':
 			if(flag == 1 and Data_in =='45') :
 				flag =2
 			tmpPkt.append(Data_in)
+"""
