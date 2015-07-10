@@ -137,13 +137,13 @@ def ip_addr():
     ip_str = ip_str[:-1]
     mac_str = mac_chk()
     mac_str = mac_str[:-1]
-    dif = len(mac_str)-16
-    print "dif : "+str(dif)
+    
     if len(mac_str) > 16:
     	dif = len(mac_str)-16
     	print "dif : "+str(dif)
     	for i in range(dif) : 
     		mac_str = mac_str[i:15+i]
+    		print mac_str
     		lcd_string('%s ET' %ip_str,LCD_LINE_1,1)
     		lcd_string('%s' % (mac_str),LCD_LINE_2,1)
     red_backlight(False) #turn on, yellow
