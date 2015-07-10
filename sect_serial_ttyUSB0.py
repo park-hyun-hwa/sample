@@ -51,6 +51,8 @@ def sese(s):
     nodeID = s[52:56]
     #seq = s[40:44]
     
+    print s
+
     print "head : "+head
     print "type : "+type
     print "serialID : "+serialID
