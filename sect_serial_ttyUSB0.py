@@ -172,7 +172,7 @@ def sese(s):
     else:
 		print >> sys.stderr, "Invalid type : " + type
 		pass
-			
+"""			
 if __name__ == '__main__':
 
 	test = serial.Serial("/dev/ttyUSB0",115200)
@@ -201,4 +201,4 @@ if __name__ == '__main__':
 			if(flag == 1 and Data_in =='45') :
 				flag =2
 			tmpPkt.append(Data_in)
-"""
+
