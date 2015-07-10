@@ -51,8 +51,13 @@ def sese(s):
     nodeID = s[52:56]
     #seq = s[40:44]
     
+<<<<<<< HEAD
     print s
 
+=======
+    print s[:]
+    """
+>>>>>>> 15a50f38cbfd71da31db52580da7dc67d98bb6a0
     print "head : "+head
     print "type : "+type
     print "serialID : "+serialID
@@ -190,7 +195,7 @@ def sese(s):
     else:
 		print >> sys.stderr, "Invalid type : " + type
 		pass
-			
+"""			
 if __name__ == '__main__':
 
 	test = serial.Serial("/dev/ttyUSB0",115200)
