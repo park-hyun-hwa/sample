@@ -61,9 +61,9 @@ def sese(s):
         temperature = bigEndian( s[64:68] ) 
         humidity = bigEndian( s[68:72] ) 
         light = bigEndian( s[72:76] ) 
-        print "temperature : "+temperature
-        print "humidity : "+humidity
-        print "light : "+light
+        print "temperature : "+str(temperature)
+        print "humidity : "+str(humidity)
+        print "light : "+str(light)
         
         v1 = -39.6 + 0.01 * temperature 
         tmp = -4 + 0.0405 * humidity + (-0.0000028) * humidity * humidity 
@@ -85,9 +85,9 @@ def sese(s):
         tmp = (light * 1.017)
         v3 = tmp
         
-        print "temperature : "+temperature
-        print "humidity : "+humidity
-        print "light : "+light
+        print "temperature : "+str(temperature)
+        print "humidity : "+str(humidity)
+        print "light : "+str(light)
         
         v1 = -46.85 + 175.72 * float(temperature) / pow(2,16)
     	v2 = -6 + 125 * float(humidity) / pow(2,16)
