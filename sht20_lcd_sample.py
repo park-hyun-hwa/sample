@@ -133,35 +133,35 @@ def ip_addr():
     blue_backlight(False) #turn on, yellow
     time.sleep(2) 
 
-    str = ip_chk()
-    str = str[:-1]
-    str1 = mac_chk()
-    str1 = str1[:-1]
-    dif = len(str1)-16
+    ip_str = ip_chk()
+    ip_str = ip_str[:-1]
+    mac_str = mac_chk()
+    mac_str = mac_str[:-1]
+    dif = len(mac_str)-16
     print "dif : "+str(dif)
-    if len(str1) > 16:
-    	dif = len(str1)-16
+    if len(mac_str) > 16:
+    	dif = len(mac_str)-16
     	print "dif : "+str(dif)
     	for i in range(dif) : 
-    		str1 = str1[i:15+i]
-    		lcd_string('%s ET' %str,LCD_LINE_1,1)
-    		lcd_string('%s' % (str1),LCD_LINE_2,1)
+    		mac_str = mac_str[i:15+i]
+    		lcd_string('%s ET' %ip_str,LCD_LINE_1,1)
+    		lcd_string('%s' % (mac_str),LCD_LINE_2,1)
     red_backlight(False) #turn on, yellow
     time.sleep(2) 
 
-    str = wip_chk()
-    str = str[:-1]
-    lcd_string('%s WL     ' % (str),LCD_LINE_1,1)
-    str = wmac_chk()
-    str = str[:-1]
-    lcd_string('%s' % (str),LCD_LINE_2,1)
+    wip_str = wip_chk()
+    wip_str = wip_str[:-1]
+    lcd_string('%s WL     ' % (wip_str),LCD_LINE_1,1)
+    wmac_str = wmac_chk()
+    wmac_str = wmac_str[:-1]
+    lcd_string('%s' % (wmac_str),LCD_LINE_2,1)
     green_backlight(False) #turn on, yellow
     time.sleep(2) 
       
-    str = stalk_chk()
-    str = str[:-1]
+    stalk_str = stalk_chk()
+    stalk_str = stalk_str[:-1]
     lcd_string('sTalk Channel' ,LCD_LINE_1,1)
-    lcd_string('%s           ' % (str),LCD_LINE_2,1)
+    lcd_string('%s           ' % (stalk_str),LCD_LINE_2,1)
     red_backlight(False) #turn on, yellow
     time.sleep(2)
 
