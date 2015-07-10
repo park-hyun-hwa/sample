@@ -139,7 +139,7 @@ def ip_addr():
     str1 = str1[:-1]
     if len(str1) > 16:
     	dif = len(str1)-16
-    	for i in dif : 
+    	for i in range(dif) : 
     		str1 = str1[i:15+i]
     		lcd_string('%s ET' %str,LCD_LINE_1,1)
     		lcd_string('%s' % (str1),LCD_LINE_2,1)
