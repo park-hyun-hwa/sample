@@ -137,10 +137,10 @@ def ip_addr():
     str = str[:-1]
     str1 = mac_chk()
     str1 = str1[:-1]
-    print "length : "+len(str1)
+    print "length : "+str(len(str1))
     if len(str1) > 16:
     	dif = len(str1)-16
-    	print "dif : "+dif
+    	print "dif : "+str(dif)
     	for i in range(dif) : 
     		str1 = str1[i:15+i]
     		lcd_string('%s ET' %str,LCD_LINE_1,1)
