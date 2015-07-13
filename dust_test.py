@@ -72,7 +72,8 @@ if __name__ == '__main__':
     current_time = getDatetime(buffers)
     dust = getDatablocks(buffers)
     
-    print datetime.datetime.today()
+    curr_time = datetime.datetime.today()
+    print curr_time
     print_dust(dust)
     
   except KeyboardInterrupt:
