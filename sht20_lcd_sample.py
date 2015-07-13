@@ -60,7 +60,7 @@ except serial.SerialException, e:
     ledall_off()
 
 #########flow lcd##############
-def flow_lcd(line1_str,line2_str,flow_str_num)
+def flow_lcd(line1_str,line2_str,flow_str_num):
     if flow_str_num==1:
     	if len(line1_str) > 16:
     		dif = len(line1_str)-16
