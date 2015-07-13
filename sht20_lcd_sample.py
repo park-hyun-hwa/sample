@@ -139,6 +139,7 @@ def ip_addr():
     mac_str = mac_str[:-1]
     
     if len(mac_str) > 16:
+    	dif = len(mac_str)-16
     	for i in range(dif+1) : 
     		mac_str = mac_str[i:15+i]
     		print mac_str
@@ -154,6 +155,7 @@ def ip_addr():
     wmac_str = wmac_str[:-1]
     
     if len(wmac_str) > 16:
+    	dif = len(wmac_str)-16
     	for i in range(dif+1) : 
     		mac_str = mac_str[i:15+i]
     		print mac_str
