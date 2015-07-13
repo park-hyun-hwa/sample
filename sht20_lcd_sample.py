@@ -126,7 +126,6 @@ def wmac_chk():
 def stalk_chk():
     cmd = "hostname"
     return run_cmd(cmd)
-def slide_text():
 	
 def ip_addr():
     lcd_string('IP address ', LCD_LINE_1,1)
