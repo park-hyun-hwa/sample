@@ -110,6 +110,8 @@ def tem_humi():
     lcd_string('temp : %s ' %value[0],LCD_LINE_1,1)
     lcd_string('humi : %s ' %value[1],LCD_LINE_2,1)
 
+    print "temp : %s\thumi : %s" % (value[0], value[1]) 
+
     if float(value[0])< 22 :
         blueLCDon()
     elif float(value[0]) < 27 : 
@@ -120,9 +122,7 @@ def tem_humi():
     else :
         redLCDon()
         print "temp_red"
-	
-    print "temp : %s\thumi : %s" % (value[0], value[1]) 
-
+        
     time.sleep(2)
     return value[0],value[1]
 
@@ -168,10 +168,10 @@ def ip_addr():
     mac_str = mac_str[:-1]
     
     flow_lcd(ip_str,mac_str,2)
-    
-    red_backlight(False) #turn on, yellow
+   
     time.sleep(2) 
-
+    red_backlight(False) #turn on, yellow
+    
     wip_str = wip_chk()
     wip_str = wip_str[:-1]
     wmac_str = wmac_chk()
@@ -179,15 +179,16 @@ def ip_addr():
     
     flow_lcd(wip_str,wmac_str,2)
     
-    green_backlight(False) #turn on, yellow
     time.sleep(2) 
-      
+    green_backlight(False) #turn on, yellow
+    
     stalk_str = stalk_chk()
     stalk_str = stalk_str[:-1]
     lcd_string('sTalk Channel' ,LCD_LINE_1,1)
     lcd_string('%s           ' % (stalk_str),LCD_LINE_2,1)
-    red_backlight(False) #turn on, yellow
+    
     time.sleep(2)
+    red_backlight(False) #turn on, yellow
 
 #####################CO2########################
 def getHwAddr(ifname):
@@ -368,13 +369,13 @@ def print_dust(value):
     print "daejeon : "+value[6]
     
 def lcd_dust(value):
-    if value[1] < 30:
+    if int(value[1]) < 30:
     	print "dust_blue"
     	blueLCDon()
-    elif value[1] < 80:
+    elif int(value[1]) < 80:
     	print "dust_green"
     	greenLCDon()
-    elif value[1] < 150 :
+    elif int(value[1]) < 150 :
     	print "dust_yellow"
     	yellowLCDon()
 	
@@ -396,8 +397,8 @@ def lcd_dust(value):
 def dust():
 	buffers = get_page()
 	dust = getDatablocks(buffers)
-	print_dust(dust)
 	lcd_dust(dust)
+	print_dust(dust)
 	return dust[1]
 
 ###########current time####################
