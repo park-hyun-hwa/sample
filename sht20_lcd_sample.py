@@ -299,12 +299,15 @@ def CO2():
         greenLCDon()
     elif ppm < 1600:  
         #ledwhite_on()
+        print "co2_white"
         whiteLCDon()
     elif ppm < 1900:  
         #ledyellow_on()
+        print "co2_yellow"
         yellowLCDon()
     elif ppm >= 1900 :  
         #ledpurple_on()
+        print "co2_red"
     	redLCDon()
     time.sleep(2)
         
@@ -366,14 +369,15 @@ def print_dust(value):
     
 def lcd_dust(value):
     if value[1] < 30:
+    	print "dust_blue"
     	blueLCDon()
-	print "dust_blue"
     elif value[1] < 80:
+    	print "dust_green"
     	greenLCDon()
-	print "dust_green"
     elif value[1] < 150 :
+    	print "dust_yellow"
     	yellowLCDon()
-	print "dust_yellow"
+	
     lcd_string('Air',LCD_LINE_1,2)
     lcd_string('Information',LCD_LINE_2,2)
     time.sleep(2)
