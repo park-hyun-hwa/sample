@@ -56,7 +56,7 @@ if __name__ == '__main__':
     dust = getDatablocks(buffers)
     
     print "time : "+time
-    print "dust : "+str(dust)
+    print "dust : "+list(dust)
     
   except KeyboardInterrupt:
     pass
