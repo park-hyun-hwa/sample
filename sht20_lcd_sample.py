@@ -15,6 +15,8 @@ import RPi.GPIO as GPIO
 import logging
 import logging.handlers
 import fcntl,socket,struct
+import urllib2
+import httplib
 
 sys.path.append("../../devel/BerePi/apps/lcd_berepi/lib")
 from lcd import *
@@ -45,6 +47,10 @@ LOG_PATH = '/home/pi/log_tos.log'
 sensorname = "co2.test"
 logger = logging.getLogger(sensorname)
 
+#####dust variable#####################
+conn = httplib.HTTPConnection("192.168.0.16")
+data =''
+co2 = ''
 ##### open RASPI serial device, 38400#########
 try: 
     serial_in_device = serial.Serial('/dev/ttyAMA0',38400) ##38400bps 
@@ -285,6 +291,42 @@ def CO2():
         
     return ppm
 
+##################dust_get###########################
+def getWebpage(url, referer=''):
+    debug = 0
+    if debug:
+        return file(url.split('/')[-1], 'rt').read()
+    else:
+        opener = urllib2.build_opener()
+        opener.addheaders = [
+            ('User-Agent', 'Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)'),
+            ('Referer', referer),
+        ]
+        return opener.open(url).read()
+
+def getDataPage():
+    return getWebpage('http://www.airkorea.or.kr/index')
+    
+def normailize(s):
+    return s.replace('<td>','').replace('</td>','').replace(' ','')
+def printUsing():
+    print sys.argv[0], '<output file name>'
+
+def getDatetime(buffers):
+    return buffers.split('<p class="now_time">')[1].split('<strong>')[1].split('</strong>')[0]
+    
+def getDatablocks(buffers):
+    a = buffers.split('<tbody id="mt_mmc2_10007">')[1]
+    b = a.split('</tbody>')[0].replace('<tr>','').replace('</tr>','').replace('</td>','')
+    r = ''
+    for line in b.split('<td>'):
+       if len(line) < 30:
+           line = line.strip()
+           r = r+line+' '
+       else:
+           line = line.strip()
+           r = r+line+'\n'
+    return r.split('\n')[1:-1]
 ##################send data to db#####################
 def send_data(temp, humi,ppm) :
     url = "http://10.255.252.132:4242/api/put"
