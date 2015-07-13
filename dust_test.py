@@ -37,23 +37,34 @@ def getDatablocks(buffers):
     a = buffers.split('<tbody id="mt_mmc2_10007">')[1]
     b = a.split('</tbody>')[0].replace('<tr>','').replace('</tr>','').replace('</td>','')
     r = ''
-    
+    value=[]
+
     for line in b.split('<td>'):
        if len(line) < 30:
            line = line.strip()
            #line = line.split(' ')
-           print line
-           r = r+line+' '
-           print r
+           #print line
+           #r = r+line+' '
+           #print r
        else:
            line = line.strip()
+           print line
            r = r+line+'\n'
-    return r.split('\n')[1:-1]
+           value.append(line)
+    return value
 
 def get_page():
     page = urllib2.urlopen("http://www.airkorea.or.kr/index")
     text = page.read()
     return text
+
+def print_dust(value):
+    print "seoul : "+value[1]
+    print "busan : "+value[2]
+    print "deagu : "+value[3]
+    print "incheon : "+value[4]
+    print "gwangju : "+value[5]
+    print "daejeon : "+value[6]
 	
 if __name__ == '__main__':
   try:
@@ -62,7 +73,7 @@ if __name__ == '__main__':
     dust = getDatablocks(buffers)
     
     print datetime.datetime.today()
-   
+    print_dust(dust)
     
   except KeyboardInterrupt:
     pass
