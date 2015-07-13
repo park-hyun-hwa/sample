@@ -46,8 +46,8 @@ def getDatablocks(buffers):
 
 def get_page():
     page = urllib2.urlopen("http://www.airkorea.or.kr/index")
-	text = page.read()
-	return text
+    text = page.read()
+    return text
 	
 if __name__ == '__main__':
   try:
