@@ -395,11 +395,11 @@ def main():
   	tem=value[0]
   	humi=value[1]
   	ppm=CO2()
-  	time = getDatetime(buffers)
+  	current_time = getDatetime(buffers)
     	dust = getDatablocks(buffers)
-    	print time
+    	print current_time
     	print dust
-    	lcd_string('%s'  %time,LCD_LINE_1,1)
+    	lcd_string('%s'  %current_time,LCD_LINE_1,1)
 	lcd_string('%s' %dust,LCD_LINE_2,1)
 	time.sleep(2)
     	#send_data(tem,humi,ppm)
