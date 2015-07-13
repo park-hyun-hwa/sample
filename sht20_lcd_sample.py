@@ -138,6 +138,8 @@ def ip_addr():
     mac_str = mac_chk()
     mac_str = mac_str[:-1]
     
+    print mac_str
+    
     if len(mac_str) > 16:
     	dif = len(mac_str)-16
     	for i in range(dif+1) : 
