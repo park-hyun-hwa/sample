@@ -58,7 +58,27 @@ try:
 except serial.SerialException, e:
     logger.error("Serial port open error") 
     ledall_off()
-        
+
+#########flow lcd##############
+def flow_lcd(line1_str,line2_str,flow_str_num)
+    if flow_str_num==1:
+    	if len(line1_str) > 16:
+    		dif = len(line1_str)-16
+    	  	for i in range(dif+2) : 
+    			fin_line1_str = line1_str[i:i+15]
+    			lcd_string('%s' %(fin_line1_str),LCD_LINE_1,1)
+    			lcd_string('%s' % (line2_str),LCD_LINE_2,1)
+    			time.sleep(1)
+    	
+    else:
+    	if len(line2_str) > 16:
+    		dif = len(line2_str)-16
+    	  	for i in range(dif+2) : 
+    			fin_line2_str = line2_str[i:i+15]
+    			lcd_string('%s' %(line1_str),LCD_LINE_1,1)
+    			lcd_string('%s' % (fin_line2_str),LCD_LINE_2,1)
+    			time.sleep(1)
+    		
 ############temperature, humidity######################### 
 def reading(v):
     bus.write_quick(SHT20_ADDR)
@@ -145,15 +165,8 @@ def ip_addr():
     mac_str = mac_chk()
     mac_str = mac_str[:-1]
     
-    print mac_str
+    flow_lcd(ip_str,mac_str,2)
     
-    if len(mac_str) > 16:
-    	dif = len(mac_str)-16
-    	for i in range(dif+2) : 
-    		fin_mac_str = mac_str[i:i+15]
-    		lcd_string('%s ET' %ip_str,LCD_LINE_1,1)
-    		lcd_string('%s' % (fin_mac_str),LCD_LINE_2,1)
-    		time.sleep(1)
     red_backlight(False) #turn on, yellow
     time.sleep(2) 
 
@@ -162,13 +175,8 @@ def ip_addr():
     wmac_str = wmac_chk()
     wmac_str = wmac_str[:-1]
     
-    if len(wmac_str) > 16:
-    	dif = len(wmac_str)-16
-    	for i in range(dif+2) : 
-    		fin_wmac_str = wmac_str[i:i+15]
-    		lcd_string('%s WL     ' % (wip_str),LCD_LINE_1,1)
-    		lcd_string('%s' % (fin_wmac_str),LCD_LINE_2,1)
-    		time.sleep(1)
+    flow_lcd(wip_str,wmac_str,2)
+    
     green_backlight(False) #turn on, yellow
     time.sleep(2) 
       
@@ -368,9 +376,9 @@ def dust():
 
 ###########current time####################
 def current_time():
-    curr_time = datetime.datetime.today()	
-    lcd_string('current time' ,LCD_LINE_1,2)
-    lcd_string(' %s' % (curr_time),LCD_LINE_2,1)
+    curr_time = datetime.datetime.today()
+    curr_time = curr_time[:18]
+    flow_lcd('current time',curr_time,2)
     print "time : "+str(curr_time)
     time.sleep(2)
 
