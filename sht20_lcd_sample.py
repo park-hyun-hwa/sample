@@ -188,7 +188,7 @@ def ip_addr():
     lcd_string('%s           ' % (stalk_str),LCD_LINE_2,1)
     
     time.sleep(2)
-    red_backlight(False) #turn on, yellow
+    #red_backlight(False) #turn on, yellow
 
 #####################CO2########################
 def getHwAddr(ifname):
@@ -397,12 +397,13 @@ def lcd_dust(value):
 def dust():
 	buffers = get_page()
 	dust = getDatablocks(buffers)
-	lcd_dust(dust)
 	print_dust(dust)
+	lcd_dust(dust)
 	return dust[1]
 
 ###########current time####################
 def current_time():
+    pinkLCDon()
     curr_time = datetime.datetime.today()
     curr_time = str(curr_time)[:19]
     flow_lcd('current time',curr_time,2)
