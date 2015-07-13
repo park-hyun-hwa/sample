@@ -118,6 +118,7 @@ def tem_humi():
         yellowLCDon()
     else :
         redLCDon()
+        print "temp_red"
 	
     print "temp : %s\thumi : %s" % (value[0], value[1]) 
 
@@ -288,9 +289,11 @@ def CO2():
         blueLCDon()
     elif ppm < 1000 :  
         #ledbluegreen_on()
+        print "co2_skye"
         skyeLCDon()
     elif ppm < 1300 :  
         #ledgreen_on()
+        print "co2_green"
         greenLCDon()
     elif ppm < 1600:  
         #ledwhite_on()
