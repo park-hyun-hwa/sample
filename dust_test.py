@@ -37,12 +37,11 @@ def getDatablocks(buffers):
     a = buffers.split('<tbody id="mt_mmc2_10007">')[1]
     b = a.split('</tbody>')[0].replace('<tr>','').replace('</tr>','').replace('</td>','')
     r = ''
-    print a
-    print b
     
     for line in b.split('<td>'):
        if len(line) < 30:
            line = line.strip()
+           line = line.split(' ')
            r = r+line+' '
            print r
        else:
