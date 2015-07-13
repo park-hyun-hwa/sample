@@ -35,10 +35,16 @@ def getDatablocks(buffers):
     a = buffers.split('<tbody id="mt_mmc2_10007">')[1]
     b = a.split('</tbody>')[0].replace('<tr>','').replace('</tr>','').replace('</td>','')
     r = ''
+    print a
+    print b
+    
     for line in b.split('<td>'):
        if len(line) < 30:
+       	   print line
            line = line.strip()
+           print line
            r = r+line+' '
+           print r
        else:
            line = line.strip()
            r = r+line+'\n'
@@ -52,11 +58,11 @@ def get_page():
 if __name__ == '__main__':
   try:
     buffers = get_page()
-    time = getDatetime(buffers)
+    current_time = getDatetime(buffers)
     dust = getDatablocks(buffers)
     
-    print "time : "+time
-    print "dust : "+list(dust)
+    print time.time()
+    print "dust : "+str(dust)
     
   except KeyboardInterrupt:
     pass
