@@ -288,7 +288,7 @@ def CO2():
         blueLCDon()
     elif ppm < 1000 :  
         ledbluegreen_on()
-        skyLCDon()
+        skyeLCDon()
     elif ppm < 1300 :  
         ledgreen_on()
         greenLCDon()
