@@ -41,7 +41,8 @@ def getDatablocks(buffers):
     for line in b.split('<td>'):
        if len(line) < 30:
            line = line.strip()
-           line = line.split(' ')
+           #line = line.split(' ')
+           print line
            r = r+line+' '
            print r
        else:
