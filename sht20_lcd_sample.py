@@ -377,7 +377,7 @@ def dust():
 ###########current time####################
 def current_time():
     curr_time = datetime.datetime.today()
-    curr_time = curr_time[:18]
+    curr_time = str(curr_time)[:18]
     flow_lcd('current time',curr_time,2)
     print "time : "+str(curr_time)
     time.sleep(2)
