@@ -3,6 +3,8 @@ import sys
 import urllib2
 import httplib
 import time
+import datetime
+
 conn = httplib.HTTPConnection("192.168.0.16")
 data =''
 co2 = ''
@@ -40,9 +42,7 @@ def getDatablocks(buffers):
     
     for line in b.split('<td>'):
        if len(line) < 30:
-       	   print line
            line = line.strip()
-           print line
            r = r+line+' '
            print r
        else:
@@ -61,8 +61,8 @@ if __name__ == '__main__':
     current_time = getDatetime(buffers)
     dust = getDatablocks(buffers)
     
-    print time.time()
-    print "dust : "+str(dust)
+    print datetime.datetime.today()
+   
     
   except KeyboardInterrupt:
     pass
