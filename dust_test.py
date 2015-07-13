@@ -43,3 +43,9 @@ def getDatablocks(buffers):
            line = line.strip()
            r = r+line+'\n'
     return r.split('\n')[1:-1]
+    
+if __name__ == '__main__':
+  try:
+    print getDataPage()
+  except KeyboardInterrupt:
+    pass
