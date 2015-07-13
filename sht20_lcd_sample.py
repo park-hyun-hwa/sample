@@ -17,6 +17,7 @@ import logging.handlers
 import fcntl,socket,struct
 import urllib2
 import httplib
+import datetime
 
 sys.path.append("../../devel/BerePi/apps/lcd_berepi/lib")
 from lcd import *
@@ -292,7 +293,7 @@ def CO2():
     return ppm
 
 ##################dust_get###########################
-def getWebpage(url, referer=''):
+"""def getWebpage(url, referer=''):
     debug = 0
     if debug:
         return file(url.split('/')[-1], 'rt').read()
@@ -306,14 +307,20 @@ def getWebpage(url, referer=''):
 
 def getDataPage():
     return getWebpage('http://www.airkorea.or.kr/index')
-    
+"""    
 def normailize(s):
     return s.replace('<td>','').replace('</td>','').replace(' ','')
+    
 def printUsing():
     print sys.argv[0], '<output file name>'
 
 def getDatetime(buffers):
     return buffers.split('<p class="now_time">')[1].split('<strong>')[1].split('</strong>')[0]
+    
+def get_page():
+    page = urllib2.urlopen("http://www.airkorea.or.kr/index")
+    text = page.read()
+    return text    
     
 def getDatablocks(buffers):
     a = buffers.split('<tbody id="mt_mmc2_10007">')[1]
@@ -328,10 +335,37 @@ def getDatablocks(buffers):
            r = r+line+'\n'
     return r.split('\n')[1:-1]
 
-def get_page():
-    page = urllib2.urlopen("http://www.airkorea.or.kr/index")
-    text = page.read()
-    return text
+def print_dust(value):
+    print "seoul : "+value[1]
+    print "busan : "+value[2]
+    print "deagu : "+value[3]
+    print "incheon : "+value[4]
+    print "gwangju : "+value[5]
+    print "daejeon : "+value[6]
+    
+def lcd_dust(value):
+    lcd_string('seoul : %s' % (value[1]),LCD_LINE_1,1)
+    lcd_string('busan : %s' % (value[2]),LCD_LINE_2,1)
+    time.sleep(1)
+    lcd_string('deagu : %s' % (value[3]),LCD_LINE_1,1)
+    lcd_string('incheon : %s' % (value[4]),LCD_LINE_2,1)
+    time.sleep(1)
+    lcd_string('gwangju : %s' % (value[5]),LCD_LINE_1,1)
+    lcd_string('daejeon : %s' % (value[6]),LCD_LINE_2,1)
+    time.sleep(1)
+
+def dust():
+	buffers = get_page()
+	dust = getDatablocks(buffers)
+	print_dust(dust)
+	lcd_dust(dust)
+
+###########current time####################
+def current_time():
+    curr_time = datetime.datetime.today()	
+    lcd_string('current time' ,LCD_LINE_1,1)
+    lcd_string(' %s' % (curr_time),LCD_LINE_2,1)
+    print "time : "+curr_time
     
 ##################send data to db#####################
 def send_data(temp, humi,ppm) :
@@ -390,18 +424,14 @@ def main():
     buffers = get_page()
     
     while True :
+    	current_time()
         ip_addr()
   	value=tem_humi()
   	tem=value[0]
   	humi=value[1]
   	ppm=CO2()
-  	current_time = getDatetime(buffers)
-    	dust = getDatablocks(buffers)
-    	print current_time
-    	print dust
-    	lcd_string('%s'  %current_time,LCD_LINE_1,1)
-	lcd_string('%s' %dust,LCD_LINE_2,1)
-	time.sleep(2)
+  	dust()
+	#time.sleep(2)
     	#send_data(tem,humi,ppm)
 	
 if __name__ == '__main__':
