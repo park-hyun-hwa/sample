@@ -161,17 +161,17 @@ def ip_addr():
     lcd_string('MAC eth0, wlan0',LCD_LINE_2,1)
     blue_backlight(False) #turn on, yellow
     time.sleep(2) 
-
+    
+    red_backlight(False) #turn on, yellow
     ip_str = ip_chk()
     ip_str = ip_str[:-1]
     mac_str = mac_chk()
     mac_str = mac_str[:-1]
     
     flow_lcd(ip_str,mac_str,2)
-   
     time.sleep(2) 
-    red_backlight(False) #turn on, yellow
     
+    green_backlight(False) #turn on, yellow
     wip_str = wip_chk()
     wip_str = wip_str[:-1]
     wmac_str = wmac_chk()
@@ -180,15 +180,14 @@ def ip_addr():
     flow_lcd(wip_str,wmac_str,2)
     
     time.sleep(2) 
-    green_backlight(False) #turn on, yellow
     
+    red_backlight(False) #turn on, yellow
     stalk_str = stalk_chk()
     stalk_str = stalk_str[:-1]
     lcd_string('sTalk Channel' ,LCD_LINE_1,1)
     lcd_string('%s           ' % (stalk_str),LCD_LINE_2,1)
     
     time.sleep(2)
-    #red_backlight(False) #turn on, yellow
 
 #####################CO2########################
 def getHwAddr(ifname):
