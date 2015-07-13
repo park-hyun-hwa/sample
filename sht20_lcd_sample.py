@@ -397,8 +397,8 @@ def main():
   	ppm=CO2()
   	time = getDatetime(buffers)
     	dust = getDatablocks(buffers)
-    	lcd_string( %d  %time,LCD_LINE_1,1)
-	lcd_string(%s %dust,LCD_LINE_2,1)
+    	lcd_string('%d'  %time,LCD_LINE_1,1)
+	lcd_string('%s' %dust,LCD_LINE_2,1)
     	send_data(tem,humi,ppm)
 	
 if __name__ == '__main__':
