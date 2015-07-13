@@ -115,8 +115,8 @@ def tem_humi():
     elif float(value[0]) < 27 : 
         greenLCDon()
     elif float(value[0]) < 29 :
-        yellowLCDon()
 	print "temp_yellow"
+        yellowLCDon()
     else :
         redLCDon()
         print "temp_red"
@@ -292,7 +292,7 @@ def CO2():
     elif ppm < 1000 :  
         #ledbluegreen_on()
         print "co2_skye"
-        skyeLCDon()
+        pinkLCDon()
     elif ppm < 1300 :  
         #ledgreen_on()
         print "co2_green"
@@ -379,15 +379,15 @@ def lcd_dust(value):
     lcd_string('daejeon : %s' % (value[6]),LCD_LINE_2,1)
     time.sleep(2)
     
-    if value[1] < 30:
-    	blueLCDon()
-	print "dust_blue"
-    elif value[1] < 80:
-    	greenLCDon()
+    if int(value[1]) < 30:
+    	print "dust_blue"
+	blueLCDon()
+    elif int(value[1]) < 80:
 	print "dust_green"
-    elif value[1] < 150 :
-    	yellowLCDon()
+    	greenLCDon()
+    elif int(value[1]) < 150 :
 	print "dust_yellow"
+    	yellowLCDon()
 
 def dust():
 	buffers = get_page()
