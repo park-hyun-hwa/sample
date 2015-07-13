@@ -388,19 +388,7 @@ def lcd_dust(value):
     lcd_string('daejeon : %s' % (value[6]),LCD_LINE_2,1)
     time.sleep(2)
     
-<<<<<<< HEAD
-    if int(value[1]) < 30:
-    	print "dust_blue"
-	blueLCDon()
-    elif int(value[1]) < 80:
-	print "dust_green"
-    	greenLCDon()
-    elif int(value[1]) < 150 :
-	print "dust_yellow"
-    	yellowLCDon()
 
-=======
->>>>>>> 0dc2172065b7cf1fca7b63e8e3dc5533e5987581
 def dust():
 	buffers = get_page()
 	dust = getDatablocks(buffers)
