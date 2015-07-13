@@ -51,6 +51,12 @@ def get_page():
 	
 if __name__ == '__main__':
   try:
-    print get_page()
+    buffers = get_page()
+    time = getDatetime(buffers)
+    dust = getDatablocks(buffers)
+    
+    print "time : "+time
+    print "dust : "+dust
+    
   except KeyboardInterrupt:
     pass
