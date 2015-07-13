@@ -397,6 +397,8 @@ def main():
   	ppm=CO2()
   	time = getDatetime(buffers)
     	dust = getDatablocks(buffers)
+    	print time
+    	print dust
     	lcd_string('%s'  %time,LCD_LINE_1,1)
 	lcd_string('%s' %dust,LCD_LINE_2,1)
 	time.sleep(2)
