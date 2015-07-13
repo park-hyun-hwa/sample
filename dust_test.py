@@ -43,9 +43,14 @@ def getDatablocks(buffers):
            line = line.strip()
            r = r+line+'\n'
     return r.split('\n')[1:-1]
-    
+
+def get_page():
+    page = urllib2.urlopen("http://www.airkorea.or.kr/index")
+	text = page.read()
+	return text
+	
 if __name__ == '__main__':
   try:
-    print getDataPage()
+    print get_page()
   except KeyboardInterrupt:
     pass
