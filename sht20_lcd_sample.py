@@ -368,7 +368,7 @@ def lcd_dust(value):
     	blueLCDon()
     elif value[1] < 80:
     	greenLCDon()
-    elif value[2] < 150 :
+    elif value[1] < 150 :
     	yellowLCDon()
     	
     lcd_string('seoul : %s' % (value[1]),LCD_LINE_1,1)
@@ -386,7 +386,7 @@ def dust():
 	dust = getDatablocks(buffers)
 	print_dust(dust)
 	lcd_dust(dust)
-	return value[1]
+	return dust[1]
 
 ###########current time####################
 def current_time():
