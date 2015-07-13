@@ -307,7 +307,7 @@ def CO2():
 
 def getDataPage():
     return getWebpage('http://www.airkorea.or.kr/index')
-"""    
+    
 def normailize(s):
     return s.replace('<td>','').replace('</td>','').replace(' ','')
     
@@ -316,7 +316,7 @@ def printUsing():
 
 def getDatetime(buffers):
     return buffers.split('<p class="now_time">')[1].split('<strong>')[1].split('</strong>')[0]
-    
+"""    
 def get_page():
     page = urllib2.urlopen("http://www.airkorea.or.kr/index")
     text = page.read()
@@ -326,6 +326,8 @@ def getDatablocks(buffers):
     a = buffers.split('<tbody id="mt_mmc2_10007">')[1]
     b = a.split('</tbody>')[0].replace('<tr>','').replace('</tr>','').replace('</td>','')
     r = ''
+    value=[]
+
     for line in b.split('<td>'):
        if len(line) < 30:
            line = line.strip()
@@ -333,7 +335,8 @@ def getDatablocks(buffers):
        else:
            line = line.strip()
            r = r+line+'\n'
-    return r.split('\n')[1:-1]
+	   value.append(line)
+    return value
 
 def print_dust(value):
     print "seoul : "+value[1]
@@ -344,15 +347,18 @@ def print_dust(value):
     print "daejeon : "+value[6]
     
 def lcd_dust(value):
+    lcd_string('Air',LCD_LINE_1,2)
+    lcd_string('Information',LCD_LINE_2,2)
+    time.sleep(2)
     lcd_string('seoul : %s' % (value[1]),LCD_LINE_1,1)
     lcd_string('busan : %s' % (value[2]),LCD_LINE_2,1)
-    time.sleep(1)
+    time.sleep(2)
     lcd_string('deagu : %s' % (value[3]),LCD_LINE_1,1)
     lcd_string('incheon : %s' % (value[4]),LCD_LINE_2,1)
-    time.sleep(1)
+    time.sleep(2)
     lcd_string('gwangju : %s' % (value[5]),LCD_LINE_1,1)
     lcd_string('daejeon : %s' % (value[6]),LCD_LINE_2,1)
-    time.sleep(1)
+    time.sleep(2)
 
 def dust():
 	buffers = get_page()
@@ -363,10 +369,11 @@ def dust():
 ###########current time####################
 def current_time():
     curr_time = datetime.datetime.today()	
-    lcd_string('current time' ,LCD_LINE_1,1)
+    lcd_string('current time' ,LCD_LINE_1,2)
     lcd_string(' %s' % (curr_time),LCD_LINE_2,1)
-    print "time : "+curr_time
-    
+    print "time : "+str(curr_time)
+    time.sleep(2)
+
 ##################send data to db#####################
 def send_data(temp, humi,ppm) :
     url = "http://10.255.252.132:4242/api/put"
@@ -431,7 +438,6 @@ def main():
   	humi=value[1]
   	ppm=CO2()
   	dust()
-	#time.sleep(2)
     	#send_data(tem,humi,ppm)
 	
 if __name__ == '__main__':
