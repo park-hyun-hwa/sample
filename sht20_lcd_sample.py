@@ -365,7 +365,7 @@ def print_dust(value):
     print "daejeon : "+value[6]
     
 def lcd_dust(value):
-     if value[1] < 30:
+    if value[1] < 30:
     	blueLCDon()
 	print "dust_blue"
     elif value[1] < 80:
