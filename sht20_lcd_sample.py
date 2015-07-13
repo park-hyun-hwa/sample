@@ -284,22 +284,22 @@ def CO2():
                 logger.info("%s", logline)
 
     if ppm < 800 :  
-        ledblue_on()
+        #ledblue_on()
         blueLCDon()
     elif ppm < 1000 :  
-        ledbluegreen_on()
+        #ledbluegreen_on()
         skyeLCDon()
     elif ppm < 1300 :  
-        ledgreen_on()
+        #ledgreen_on()
         greenLCDon()
     elif ppm < 1600:  
-        ledwhite_on()
+        #ledwhite_on()
         whiteLCDon()
     elif ppm < 1900:  
-        ledyellow_on()
+        #ledyellow_on()
         yellowLCDon()
     elif ppm >= 1900 :  
-        ledpurple_on()
+        #ledpurple_on()
     	redLCDon()
     time.sleep(2)
         
@@ -364,13 +364,6 @@ def lcd_dust(value):
     lcd_string('Information',LCD_LINE_2,2)
     time.sleep(2)
     
-    if value[1] < 30:
-    	blueLCDon()
-    elif value[1] < 80:
-    	greenLCDon()
-    elif value[1] < 150 :
-    	yellowLCDon()
-    	
     lcd_string('seoul : %s' % (value[1]),LCD_LINE_1,1)
     lcd_string('busan : %s' % (value[2]),LCD_LINE_2,1)
     time.sleep(2)
@@ -380,6 +373,13 @@ def lcd_dust(value):
     lcd_string('gwangju : %s' % (value[5]),LCD_LINE_1,1)
     lcd_string('daejeon : %s' % (value[6]),LCD_LINE_2,1)
     time.sleep(2)
+    
+    if value[1] < 30:
+    	blueLCDon()
+    elif value[1] < 80:
+    	greenLCDon()
+    elif value[1] < 150 :
+    	yellowLCDon()
 
 def dust():
 	buffers = get_page()
