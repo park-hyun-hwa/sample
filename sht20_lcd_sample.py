@@ -48,7 +48,7 @@ sensorname = "co2.test"
 logger = logging.getLogger(sensorname)
 
 #####dust variable#####################
-conn = httplib.HTTPConnection("192.168.0.16")
+#conn = httplib.HTTPConnection("192.168.0.16")
 data =''
 co2 = ''
 ##### open RASPI serial device, 38400#########
@@ -327,6 +327,12 @@ def getDatablocks(buffers):
            line = line.strip()
            r = r+line+'\n'
     return r.split('\n')[1:-1]
+
+def get_page():
+    page = urllib2.urlopen("http://www.airkorea.or.kr/index")
+    text = page.read()
+    return text
+    
 ##################send data to db#####################
 def send_data(temp, humi,ppm) :
     url = "http://10.255.252.132:4242/api/put"
@@ -381,6 +387,7 @@ def main():
     # Initialise display
     lcd_init()
     print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
+    buffers = get_page()
     
     while True :
         ip_addr()
@@ -388,6 +395,10 @@ def main():
   	tem=value[0]
   	humi=value[1]
   	ppm=CO2()
+  	time = getDatetime(buffers)
+    	dust = getDatablocks(buffers)
+    	lcd_string( %d  %time,LCD_LINE_1,1)
+	lcd_string(%s %dust,LCD_LINE_2,1)
     	send_data(tem,humi,ppm)
 	
 if __name__ == '__main__':
