@@ -141,6 +141,8 @@ def ip_addr():
     if len(mac_str) > 16:
     	dif = len(mac_str)-16
     	for i in range(dif+1) : 
+    		print i
+    		print i+15
     		mac_str = mac_str[i:i+15]
     		print mac_str
     		lcd_string('%s ET' %ip_str,LCD_LINE_1,1)
