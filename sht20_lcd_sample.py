@@ -285,17 +285,22 @@ def CO2():
 
     if ppm < 800 :  
         ledblue_on()
+        blueLCDon()
     elif ppm < 1000 :  
         ledbluegreen_on()
+        skyLCDon()
     elif ppm < 1300 :  
         ledgreen_on()
+        greenLCDon()
     elif ppm < 1600:  
         ledwhite_on()
+        whiteLCDon()
     elif ppm < 1900:  
         ledyellow_on()
+        yellowLCDon()
     elif ppm >= 1900 :  
         ledpurple_on()
-    
+    	redLCDon()
     time.sleep(2)
         
     return ppm
@@ -358,6 +363,14 @@ def lcd_dust(value):
     lcd_string('Air',LCD_LINE_1,2)
     lcd_string('Information',LCD_LINE_2,2)
     time.sleep(2)
+    
+    if value[1] < 30:
+    	blueLCDon()
+    elif value[1] < 80:
+    	greenLCDon()
+    elif value[2] < 150 :
+    	yellowLCDon()
+    	
     lcd_string('seoul : %s' % (value[1]),LCD_LINE_1,1)
     lcd_string('busan : %s' % (value[2]),LCD_LINE_2,1)
     time.sleep(2)
@@ -373,17 +386,18 @@ def dust():
 	dust = getDatablocks(buffers)
 	print_dust(dust)
 	lcd_dust(dust)
+	return value[1]
 
 ###########current time####################
 def current_time():
     curr_time = datetime.datetime.today()
-    curr_time = str(curr_time)[:18]
+    curr_time = str(curr_time)[:19]
     flow_lcd('current time',curr_time,2)
     print "time : "+str(curr_time)
     time.sleep(2)
 
 ##################send data to db#####################
-def send_data(temp, humi,ppm) :
+def send_data(temp, humi,ppm,dust) :
     url = "http://10.255.252.132:4242/api/put"
     data = {
             "metric": "sht20.temp",
@@ -418,6 +432,19 @@ def send_data(temp, humi,ppm) :
 		}
     }
     ret = requests.post(url, data=json.dumps(data))
+    
+    print ret.text
+    
+    data = {
+		"metric":"html.dust",
+		"timestamp" : time.time(),
+		"value" : seouldust,
+		"tags" : {
+			"host" : "hyunhwa"
+		}
+    }
+    ret = requests.post(url, data=json.dumps(data))
+    
     print ret.text
 ############## main ############################    
 def main():
@@ -445,8 +472,8 @@ def main():
   	tem=value[0]
   	humi=value[1]
   	ppm=CO2()
-  	dust()
-    	#send_data(tem,humi,ppm)
+  	seoul_dust = dust()
+    	#send_data(tem,humi,ppm,seoul_dust)
 	
 if __name__ == '__main__':
   try:
