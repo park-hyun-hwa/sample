@@ -399,6 +399,7 @@ def main():
     	dust = getDatablocks(buffers)
     	lcd_string('%s'  %time,LCD_LINE_1,1)
 	lcd_string('%s' %dust,LCD_LINE_2,1)
+	time.sleep(2)
     	#send_data(tem,humi,ppm)
 	
 if __name__ == '__main__':
