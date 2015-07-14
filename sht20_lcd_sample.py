@@ -482,9 +482,9 @@ def main():
     #initialise sound
     pygame.mixer.init()
     pygame.mixer.music.load("sound_test.mp3")
+    pygame.mixer.music.play()
     
     while True :
-    	pygame.mixer.music.play()
     	current_time()
         ip_addr()
   	value=tem_humi()
