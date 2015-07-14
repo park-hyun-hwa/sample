@@ -483,7 +483,7 @@ def main():
     pygame.mixer.init()
     pygame.mixer.music.load("sound_test.mp3")
     pygame.mixer.music.play()
-    
+    print "start play"
     while True :
     	current_time()
         ip_addr()
@@ -494,6 +494,7 @@ def main():
   	seoul_dust = dust()
   	print pygame.mixer.music.get_busy()
   	if pygame.mixer.music.get_busy()==0:
+  		print "start re-play"
     		pygame.mixer.music.play()
     	#send_data(tem,humi,ppm,seoul_dust)
     	#pygame.mixer.music.unpause()
