@@ -485,8 +485,6 @@ def main():
     pygame.mixer.music.play()
     
     while True :
-    	#pygame.mixer.music.rewind()
-    	
     	current_time()
         ip_addr()
   	value=tem_humi()
