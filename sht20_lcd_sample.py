@@ -18,6 +18,7 @@ import fcntl,socket,struct
 import urllib2
 import httplib
 import datetime
+import pygame
 
 sys.path.append("../../devel/BerePi/apps/lcd_berepi/lib")
 from lcd import *
@@ -478,7 +479,12 @@ def main():
     print ip_chk(), wip_chk(), mac_chk(), wmac_chk(), stalk_chk()
     buffers = get_page()
     
+    #initialise sound
+    pygame.mixer.init()
+    pygame.mixer.music.load("sound_test.mp3")
+    
     while True :
+    	pygame.mixer.music.play()
     	current_time()
         ip_addr()
   	value=tem_humi()
