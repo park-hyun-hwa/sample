@@ -493,9 +493,9 @@ def main():
   	ppm=CO2()
   	seoul_dust = dust()
     	send_data(tem,humi,ppm,seoul_dust)
-    	pygame.mixer.music.unpause()
-    	#if pygame.mixer.music.get_busy()==false:
-    		
+    	#pygame.mixer.music.unpause()
+    	if pygame.mixer.music.get_busy()==false:
+    		pygame.mixer.music.rewind()
 	
 if __name__ == '__main__':
   try:
