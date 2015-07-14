@@ -451,7 +451,7 @@ def send_data(temp, humi,ppm,dust) :
     data = {
 		"metric":"html.dust",
 		"timestamp" : time.time(),
-		"value" : seouldust,
+		"value" : dust,
 		"tags" : {
 			"host" : "hyunhwa"
 		}
