@@ -485,6 +485,7 @@ def main():
     pygame.mixer.music.play()
     
     while True :
+    	 #pygame.mixer.music.rewind()
     	current_time()
         ip_addr()
   	value=tem_humi()
@@ -493,7 +494,7 @@ def main():
   	ppm=CO2()
   	seoul_dust = dust()
   	print pygame.mixer.music.get_busy()
-  	if pygame.mixer.music.get_busy()==False:
+  	if pygame.mixer.music.get_busy()==0:
     		pygame.mixer.music.rewind()
     	send_data(tem,humi,ppm,seoul_dust)
     	#pygame.mixer.music.unpause()
