@@ -92,8 +92,19 @@ if __name__ == '__main__':
 				packet = ''.join(tmpPkt)
 				data = sese(packet)
 				
-				#lcd_string('Temperature & IP addr', LCD_LINE_1,1)
-    				#lcd_string('MAC eth0, wlan0',LCD_LINE_2,1)
+				temp = data[0]
+				humi = data[1]
+				light = data[2]
+				
+				lcd_string('Temperature ', LCD_LINE_1,1)
+    				lcd_string('%.5s `C' % (temp),LCD_LINE_2,1)
+    				time.sleep(1.5)
+    				lcd_string('Humidity ', LCD_LINE_1,1)
+    				lcd_string('%.5s `C' % (humi),LCD_LINE_2,1)
+    				time.sleep(1.5)
+    				lcd_string('Light ', LCD_LINE_1,1)
+    				lcd_string('%.5s `C' % (light),LCD_LINE_2,1)
+    				time.sleep(1.5)
 				tmpPkt = []
 				sys.stdout.flush()
 			else :
