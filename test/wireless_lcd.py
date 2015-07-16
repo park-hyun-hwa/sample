@@ -64,7 +64,7 @@ def sese(s):
         print "gyu_RC1_thl.humidity %d %.6f nodeid=%d" % ( t, v2, bigEndian( nodeID ) )
         print "gyu_RC1_thl.light %d %f nodeid=%d" % ( t, v3, bigEndian( nodeID ) )
         
-        return nodeID,v1,v2,t
+        return bigEndian( nodeID ),v1,v2,v3
         
     else:
 	print >> sys.stderr, "Invalid type : " + type
