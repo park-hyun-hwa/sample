@@ -99,74 +99,74 @@ def sese(s):
 
     elif type == "006D" or type == "006d":  #Splug
 
-		    rawData = s[54:60]
-	    	tmp = bigEndian(rawData)
-		    if tmp > 15728640:
-	    		tmp = 0
-	    	else:
-	    		tmp = float(tmp/4.127/10)
+	rawData = s[54:60]
+	tmp = bigEndian(rawData)
+	if tmp > 15728640:
+		tmp = 0
+	else:
+		tmp = float(tmp/4.127/10)
 
-    		watt = tmp
-    		t = int(time.time())
-    		print "gyu_RC1_splug.watt %d %f nodeid=%d" % (t, watt, bigEndian(nodeID))
-	    	print ""
+    	watt = tmp
+    	t = int(time.time())
+    	print "gyu_RC1_splug.watt %d %f nodeid=%d" % (t, watt, bigEndian(nodeID))
+	print ""
 
     elif type == "0072": #Splug2
-	    	rawData = s[54:60]
-		    tmp = bigEndian(rawData)
-		    if tmp > 15728640:
-	    		tmp=0
-	    	else:
-		    	tmp = float(tmp/4.127/10)
+	rawData = s[54:60]
+	tmp = bigEndian(rawData)
+	if tmp > 15728640:
+		tmp=0
+	else:
+		tmp = float(tmp/4.127/10)
 
-		    watt = tmp
-		    t = int(time.time())
-		    print "gyu_RC1_splug.watt %d %f nodeid=%d" % (t, watt, bigEndian(nodeID))
-		    print ""
-			
+	watt = tmp
+	t = int(time.time())
+	print "gyu_RC1_splug.watt %d %f nodeid=%d" % (t, watt, bigEndian(nodeID))
+	print ""
+		
     elif type == "00D3" or type == "00d3":       #etype
-	    	#if len(s) < 72:
-	    	#	print >> sys.stderr, "ignore too short data for etype:" + s
-	    	#	continue
-			
-	    	t_current = s[48:56]
-	    	current = s[64:72]
+	#if len(s) < 72:
+	#	print >> sys.stderr, "ignore too short data for etype:" + s
+	#	continue
+		
+	t_current = s[48:56]
+	current = s[64:72]
 
-	    	current = toFloat(swapBytes(current))
-	    	t_current = littleEndian(swapBytes(t_current))
-	    	nodeID = bigEndian(nodeID)
+	current = toFloat(swapBytes(current))
+	t_current = littleEndian(swapBytes(t_current))
+	nodeID = bigEndian(nodeID)
 
-	    	if current > ETYPE_VALUE_MAX:
-	    		print >> sys.stderr, "overflow etype.current: %f, nodeID=%d" %(current, nodeID)
-	    	elif current <= 0:
-	    		print >> sys.stderr, "underflow etype.current: %f, nodeID=%d" %(current, nodeID)
-	    	else:
-		    	t = int(time.time())
-		    	print "gyu_RC1_etype.t_current %d %d nodeid=%d" % (t, t_current, nodeID)
-		    	print "gyu_RC1_etype.current %d %f nodeid=%d" % (t, current, nodeID)
-			
-    elif type == "0071":
-		ppm = s[48:52]
-
+	if current > ETYPE_VALUE_MAX:
+		print >> sys.stderr, "overflow etype.current: %f, nodeID=%d" %(current, nodeID)
+	elif current <= 0:
+		print >> sys.stderr, "underflow etype.current: %f, nodeID=%d" %(current, nodeID)
+	else:
 		t = int(time.time())
-		tmp = int(bigEndian(ppm))
-		value = tmp
-		print "gyu_RC1_co2.ppm %d %f nodeid=%d" % (t, value, bigEndian(nodeID))
-		print ""
+		print "gyu_RC1_etype.t_current %d %d nodeid=%d" % (t, t_current, nodeID)
+		print "gyu_RC1_etype.current %d %f nodeid=%d" % (t, current, nodeID)
+		
+    elif type == "0071":
+	ppm = s[48:52]
+
+	t = int(time.time())
+	tmp = int(bigEndian(ppm))
+	value = tmp
+	print "gyu_RC1_co2.ppm %d %f nodeid=%d" % (t, value, bigEndian(nodeID))
+	print ""
 
     elif type == "0063":  # base
-		recv = bigEndian(s[48:52])
-		send = bigEndian(s[52:56])
+	recv = bigEndian(s[48:52])
+	send = bigEndian(s[52:56])
 
-		t = int(time.time())
-		print "gyu_RC1_base.recv %d %f nodeid=%d" % (t, recv, bigEndian(nodeID))
-		print "gyu_RC1_base.send %d %f nodeid=%d" % (t, send, bigEndian(nodeID))
-		print ""
-		print ""
+	t = int(time.time())
+	print "gyu_RC1_base.recv %d %f nodeid=%d" % (t, recv, bigEndian(nodeID))
+	print "gyu_RC1_base.send %d %f nodeid=%d" % (t, send, bigEndian(nodeID))
+	print ""
+	print ""
 
     else:
-		print >> sys.stderr, "Invalid type : " + type
-		pass
+	print >> sys.stderr, "Invalid type : " + type
+	pass
 			
 if __name__ == '__main__':
 
