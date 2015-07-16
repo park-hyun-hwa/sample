@@ -110,7 +110,7 @@ if __name__ == '__main__':
     					lcd_string('%.5s percent' % (humi),LCD_LINE_2,1)
     					time.sleep(2)
     					lcd_string('Light ', LCD_LINE_1,1)
-    					lcd_string('%.5s lm' % (light),LCD_LINE_2,1)
+    					lcd_string('%.7s lm' % (light),LCD_LINE_2,1)
     					time.sleep(2)
 				tmpPkt = []
 				sys.stdout.flush()
