@@ -64,11 +64,11 @@ def sese(s):
         print "gyu_RC1_thl.humidity %d %.6f nodeid=%d" % ( t, v2, bigEndian( nodeID ) )
         print "gyu_RC1_thl.light %d %f nodeid=%d" % ( t, v3, bigEndian( nodeID ) )
         
-        return v1,v2,t
+        return nodeID,v1,v2,t
         
     else:
 	print >> sys.stderr, "Invalid type : " + type
-	return 0,0,0
+	return 0,0,0,0
 if __name__ == '__main__':
 
 	test = serial.Serial("/dev/ttyUSB0",115200)
@@ -97,16 +97,17 @@ if __name__ == '__main__':
 				if temp == 0 : 
 					lcd_string('Invalid type',LCD_LINE_1,2)
 					lcd_string(' ',LCD_LINE_2,2)
+					time.sleep(2)
     				else : 
     					lcd_string('Temperature ', LCD_LINE_1,1)
     					lcd_string('%.5s `C' % (temp),LCD_LINE_2,1)
-    					time.sleep(1.5)
+    					time.sleep(2)
     					lcd_string('Humidity ', LCD_LINE_1,1)
-    					lcd_string('%.5s `C' % (humi),LCD_LINE_2,1)
-    					time.sleep(1.5)
+    					lcd_string('%.5s %' % (humi),LCD_LINE_2,1)
+    					time.sleep(2)
     					lcd_string('Light ', LCD_LINE_1,1)
-    					lcd_string('%.5s `C' % (light),LCD_LINE_2,1)
-    					time.sleep(1.5)
+    					lcd_string('%.5s ' % (light),LCD_LINE_2,1)
+    					time.sleep(2)
 				tmpPkt = []
 				sys.stdout.flush()
 			else :
