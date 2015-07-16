@@ -91,22 +91,26 @@ if __name__ == '__main__':
 				packet = ''.join(tmpPkt)
 				data = sese(packet)
 				
-				temp = data[0]
-				humi = data[1]
-				light = data[2]
+				nodeid = data[0]
+				temp = data[1]
+				humi = data[2]
+				light = data[3]
 				if temp == 0 : 
 					lcd_string('Invalid type',LCD_LINE_1,2)
-					lcd_string(' ',LCD_LINE_2,2)
+					lcd_string('nodeID=%s' %(nodeid),LCD_LINE_2,2)
 					time.sleep(2)
     				else : 
+    					lcd_string('Valid type',LCD_LINE_1,2)
+					lcd_string('nodeID=%s' %(nodeid),LCD_LINE_2,2)
+					time.sleep(2)
     					lcd_string('Temperature ', LCD_LINE_1,1)
     					lcd_string('%.5s `C' % (temp),LCD_LINE_2,1)
     					time.sleep(2)
     					lcd_string('Humidity ', LCD_LINE_1,1)
-    					lcd_string('%.5s %' % (humi),LCD_LINE_2,1)
+    					lcd_string('%.5s percent' % (humi),LCD_LINE_2,1)
     					time.sleep(2)
     					lcd_string('Light ', LCD_LINE_1,1)
-    					lcd_string('%.5s ' % (light),LCD_LINE_2,1)
+    					lcd_string('%.5s lm' % (light),LCD_LINE_2,1)
     					time.sleep(2)
 				tmpPkt = []
 				sys.stdout.flush()
