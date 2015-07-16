@@ -68,8 +68,7 @@ def sese(s):
         
     else:
 	print >> sys.stderr, "Invalid type : " + type
-	pass
-			
+	return 0,0,0
 if __name__ == '__main__':
 
 	test = serial.Serial("/dev/ttyUSB0",115200)
@@ -95,16 +94,19 @@ if __name__ == '__main__':
 				temp = data[0]
 				humi = data[1]
 				light = data[2]
-				
-				lcd_string('Temperature ', LCD_LINE_1,1)
-    				lcd_string('%.5s `C' % (temp),LCD_LINE_2,1)
-    				time.sleep(1.5)
-    				lcd_string('Humidity ', LCD_LINE_1,1)
-    				lcd_string('%.5s `C' % (humi),LCD_LINE_2,1)
-    				time.sleep(1.5)
-    				lcd_string('Light ', LCD_LINE_1,1)
-    				lcd_string('%.5s `C' % (light),LCD_LINE_2,1)
-    				time.sleep(1.5)
+				if temp == 0 : 
+					lcd_string('Invalid type',LCD_LINE_1,2)
+					lcd_string(' ',LCD_LINE_2,2)
+    				else : 
+    					lcd_string('Temperature ', LCD_LINE_1,1)
+    					lcd_string('%.5s `C' % (temp),LCD_LINE_2,1)
+    					time.sleep(1.5)
+    					lcd_string('Humidity ', LCD_LINE_1,1)
+    					lcd_string('%.5s `C' % (humi),LCD_LINE_2,1)
+    					time.sleep(1.5)
+    					lcd_string('Light ', LCD_LINE_1,1)
+    					lcd_string('%.5s `C' % (light),LCD_LINE_2,1)
+    					time.sleep(1.5)
 				tmpPkt = []
 				sys.stdout.flush()
 			else :
