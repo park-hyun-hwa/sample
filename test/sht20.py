@@ -45,7 +45,7 @@ if __name__== "__main__" :
             #break
         value = calc(temp, humi)
         result="temp:"+str(value[0])+"\t humi:"+str(value[1])
-        for i in range(0,30):
+        for i in range(0,40):
             char = "%c" %result[i]
             data.write(char)
         data.write("\n")
