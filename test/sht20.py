@@ -44,7 +44,7 @@ if __name__== "__main__" :
             print "register error"
             #break
         value = calc(temp, humi)
-        result="temp:"+value[0]+"\t humi:"+value[1]
+        result="temp:"+str(value[0])+"\t humi:"+str(value[1])
         print "%s" %(result)
         #print "temp : %s\thumi : %s" % (value[0], value[1])
         time.sleep(1)
