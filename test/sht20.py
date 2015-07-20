@@ -42,7 +42,7 @@ if __name__== "__main__" :
         humi = reading(2)
         if not temp or not humi:
             print "register error"
-            break
+            #break
         value = calc(temp, humi)
         result="temp:"+value[0]+"\t humi:"+value[1]
         print "%s" %(result)
