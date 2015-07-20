@@ -36,12 +36,15 @@ def calc(temp, humi):
 
 if __name__== "__main__" :
 
-    while True:
+    try:
+        #data=open('sht20_data.txt','w')
         temp = reading(1)
         humi = reading(2)
         if not temp or not humi:
             print "register error"
             break
         value = calc(temp, humi)
-        print "temp : %s\thumi : %s" % (value[0], value[1])
+        result="temp:"+value[0]+"\t humi:"+value[1]
+        print "%s" %(result)
+        #print "temp : %s\thumi : %s" % (value[0], value[1])
         time.sleep(1)
