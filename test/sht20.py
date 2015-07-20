@@ -36,7 +36,7 @@ def calc(temp, humi):
 
 if __name__== "__main__" :
 
-    try:
+    #try:
         #data=open('sht20_data.txt','w')
         temp = reading(1)
         humi = reading(2)
