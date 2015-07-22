@@ -58,7 +58,7 @@ if __name__== "__main__" :
           ##  data.write(char)
         ##data.write("\n")
         ##data.close()
-        sql = "INSERT INTO oneonde (time,temperature,humidity,co2) VALUES(%s,%s,%s,%s)"
+        sql = "INSERT INTO onenode (time,temperature,humidity,co2) VALUES(%s,%s,%s,%s)"
         sql_data=(now,temp,humi,0)
         cur.execute(sql,sql_data)
         con.commit()
