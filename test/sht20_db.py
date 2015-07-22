@@ -40,6 +40,7 @@ def calc(temp, humi):
 if __name__== "__main__" :
 
     #try:
+    while True:
         #data=open('sht20_data.txt','w')
         con = mdb.connect('localhost','root','tinyos','keti')
         cur = con.cursor()
@@ -59,7 +60,7 @@ if __name__== "__main__" :
         ##data.write("\n")
         ##data.close()
         sql = "INSERT INTO onenode (time,temperature,humidity,co2) VALUES(%s,%s,%s,%s)"
-        sql_data=(now,temp,humi,0)
+        sql_data=(now,value[0],value[1],0)
         cur.execute(sql,sql_data)
         con.commit()
         cur.close()
