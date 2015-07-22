@@ -1,7 +1,7 @@
 import smbus
 import time
 import MySQLdb as mdb
-improt sys
+import sys
 import datetime
 
 SHT20_ADDR = 0x40       # SHT20 register address
