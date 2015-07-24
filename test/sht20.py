@@ -37,7 +37,8 @@ def calc(temp, humi):
 if __name__== "__main__" :
 
     #try:
-        data=open('sht20_data.txt','w')
+    while True:
+        #data=open('sht20_data.txt','w')
         temp = reading(1)
         humi = reading(2)
         if not temp or not humi:
@@ -45,11 +46,11 @@ if __name__== "__main__" :
             #break
         value = calc(temp, humi)
         result="temp:"+str(value[0])+"\t humi:"+str(value[1])
-        for i in range(0,40):
-            char = "%c" %result[i]
-            data.write(char)
-        data.write("\n")
-        data.close()
+        #for i in range(0,40):
+        #    char = "%c" %result[i]
+        #    data.write(char)
+        #data.write("\n")
+        #data.close()
         print "%s" %(result)
         #print "temp : %s\thumi : %s" % (value[0], value[1])
-        time.sleep(1)
+        time.sleep(2)
