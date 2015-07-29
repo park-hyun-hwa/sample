@@ -16,6 +16,8 @@
 - http://www.web2py.com/examples/default/examples#simple_examples
 
 #150728 스터디#
+- 참고 : https://github.com/mjhea0/web2py
+
 ##1. Web2py 작동과정 이해##
 - MVC 구조(Model View Control)
 	 	 Model : 어플리케이션 데이터
@@ -77,3 +79,11 @@
         
 - Controller에서  `request.args()` 는 특정 ID와 관련된 레코드를 가져온다.
 		아직 구현 안됨.
+
+#150729 스터디#
+
+####[예제 4 : `ip주소:포트번호/test/default/index.html` 참고]####
+- plugin으로 업로드 시켜서 레이아웃을 변경하는 작업을 수행
+- 앞으로의 진행을 메뉴에 추가 시켜가면서 기록한다.
+
+1.
