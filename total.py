@@ -412,7 +412,7 @@ def current_time():
 
 ##################send data to db#####################
 def send_data(temp, humi,ppm,dust) :
-    url = "http://10.255.252.132:4242/api/put"
+    url = "http://10.255.254.227:4242/api/put"
     data = {
             "metric": "sht20.temp",
             "timestamp" : time.time(),
