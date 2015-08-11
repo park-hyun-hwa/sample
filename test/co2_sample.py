@@ -8,7 +8,7 @@ import json
 import requests
 import fcntl, socket, struct
 
-sys.path.append("../../devel/BerePi/apps/BereCO2/lib")
+sys.path.append("../../../devel/BerePi/apps/BereCO2/lib")
 from co2led import *
 
 DEBUG_PRINT = 1
