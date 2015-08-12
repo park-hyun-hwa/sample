@@ -12,6 +12,7 @@
 - 참고 url : https://github.com/rpedroso/w2pchat
 
 1) 채팅 레이아웃 결정하기
+내가 입력한 글은 오른쪽 정렬  되고 센서들이 보내는 글은 왼쪽 정렬하기
 
 ![](picture/chtting_gui.JPG)
 		
