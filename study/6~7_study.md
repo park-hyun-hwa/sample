@@ -13,22 +13,24 @@
 
 1) 채팅 레이아웃 결정하기
 
-![](picture/chatting_gui.jpg)
+![](picture/chatting_gui.JPG)
 		
-2) Reload 버튼을 눌렀을 때 현재 온습도 알려주기
+2) `Reload 버튼`을 눌렀을 때 현재 온습도 알려주기
 
-![](picture/webtest1.jpg)
+![](picture/webtest1.JPG)
 
-3) Reload 버튼을 눌렀을 때 기준치 이상의 값이 감지 될 때만 알려주기
+3) `Reload 버튼`을 눌렀을 때 기준치 이상의 값이 감지 될 때만 알려주기
+추가적으로 할 수 있는 명령 안내하기
 
-![](picture/webtest3.jpg)
+![](picture/webtest3.JPG)
 
-4) 사용자가 특정 문구를 쳤을 때 현재 온습도 알려주기
+4) 사용자가 특정 명령을 하였을 때  (`show state`) 현재 온습도 알려주기
 
-![](picture/webtest2.jpg)
+![](picture/webtest2.JPG)
 
-5) CO2 센서 감지하고, 먼지 농도 불러와서 표시하기
+5) 사용자가 특정 명령을 하였을 때  (`show state`) 온습도 값 외에 추가적으로 CO2 센서 감지하고, 먼지 농도 불러와서 표시하기
 
-![](picture/webtest4.jpg)
+![](picture/webtest4.JPG)
 
---정리 더하기--
+6) 특정 명령을 하였을 때 (alert by LCD/1) 관련된 알림을 LCD로 전달해서 표시하기
+--진행중--
