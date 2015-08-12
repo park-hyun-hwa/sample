@@ -33,4 +33,14 @@
 
 ![](picture/webtest4.JPG)
 
-6) 특정 명령을 하였을 때 (alert by LCD/1) 관련된 알림을 LCD로 전달해서 표시하기
+6) 특정 명령을 하였을 때 (`alert by LCD/1`) 관련된 알림을 LCD로 전달해서 표시하기
+
+![](picture/web_lcdtest.jpeg)
+
+7)백그라운드에서 항상 수행되는 python 코드를  구성하여 데이터를 별다른 명령 없이도 수행하기
+- 참고 url : http://web2py.com/books/default/chapter/29/04/the-core#Running-tasks-in-the-background
+- cron을 이용하는 방법을 구상중..
+- 진행중
+
+8)명령을 LCD로 전달 할 때 알림음 실행하기
+- 진행중
