@@ -145,4 +145,20 @@
 
 ###9)명령을 LCD로 전달 할 때 알림음 실행하기###
 
-- 진행중
+- pygame을 이용한 방법.
+	- `import pygame` 을 선언하고
+
+	-  `pygame.mixer.init()` 으로 초기화 해준 뒤
+
+	-  `pygame.mixer.music.load("[절대경로]")`를 수행하면 해당 mp3 파일을 재생할 수 있는 환경이 완성된다.
+
+	-  이 때 경로를 설정하는 것에 대해서 고민을 주로 하였는데
+
+	-  명령으로 수행되든, 백그라운드에서 수행되든 상관없이 설정하기 위해서 절대경로를 사용하기로 하였다.
+
+	-  그 후 `pygame.mixer.music.play()` 을 수행하면 재생이 시작되게 된다.
+
+- pygame 과 관련된 더 자세한 정리는 [요기](https://github.com/park-hyun-hwa/sample/blob/master/study/3_study_0714.md)에  정리하였다.
+
+
+###10)
