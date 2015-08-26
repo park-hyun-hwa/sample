@@ -185,3 +185,20 @@
 
 - Web2py의 restful api라고 검색해본 결과 GET,POST,PUT 등과 같은 방식들이 db를 접근하는 방식으로 되어있는 것을 발견하였기 때문에 url 접근이 아닌 바로 db 값을 바꾸는 기존의 방식으로 돌아가기로 하였다.
 
+###11) Log를 찍어서 진행상태 확인하기 ###
+
+- `web2py/example`에 있는 `logging.conf`를 `web2py/`에 이동시킨다.
+
+- 그 후에는 `web2py/logs` 에 `web2py.log` 라는 파일이 생성되게 된다.
+
+- cron으로 실행되는 함수의 log를 확인하기 위해서 시작하였기 때문에 `logging.conf`에 있는 `cron 파트`를 약간 수정해야한다.
+
+- [ logger_cron ] 파트에서 level에는 원래 WARNING으로 설정이 되어있으나
+
+- DEBUG로 바꾸어주면 관련된 많은 log들을 확인 할 수 있다.
+
+- log를 확인 할 시에 파일을 열면 필요한 부분은 아래쪽의 몇줄만 필요한 것이기 때문에 
+
+- `tail -n [줄수] web2py.log`를 수행하면 아래쪽에서 원하는 줄 수 만큼 볼 수 있다.
+
+- 또한 `tail -n [줄수] -f web2py.log`를 수행하면 실시간으로 쌓이는 것을 확인 할 수 있다.
