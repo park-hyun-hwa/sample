@@ -143,7 +143,7 @@
     	GPIO.cleanup()
 
 
-###9)명령을 LCD로 전달 할 때 알림음 실행하기###
+###9) 명령을 LCD로 전달 할 때 알림음 실행하기###
 
 - pygame을 이용한 방법.
 	- `import pygame` 을 선언하고
@@ -161,4 +161,27 @@
 - pygame 과 관련된 더 자세한 정리는 [요기](https://github.com/park-hyun-hwa/sample/blob/master/study/3_study_0714.md)에  정리하였다.
 
 
-###10)
+###10) URL함수 이용하여 함수접근하기 ###
+
+- Web2py의 장점 중에 하나가 Restful api를 지원한다는 것이고, URL 함수는 중요한 함수 중에 하나이다.
+
+- URL 함수를 이용하여 action이나 static 파일에도 접근이 가능.
+
+- `URL('application','controller','function',args=['x','y'],vars=dict(z='t'))`라고 지정하면 `/application/controller/function/x/y?z=t` 라는 url로 매핑된다.
+
+- static 파일에 접근하고 싶을 때는 `URL('static','images/icons/arrow.png')` 라는 형식으로 접근이 가능.
+
+- URL 함수는 단지 주소를 간편하게 매핑 시켜주는 역할.
+
+- 나는 URL을 실행함으로써 반환되는 값을 이용하고 싶었기 때문에 `urllib2`에 있는 `urlopen`이라는 함수를 이용하기로 함.
+
+- `urllib2.urlopen('주소').read()`를 이용하면 반환되는 값을 이용할 수 있다.
+
+- DB를 이용하여서 값을 공유하는 방식을 쓰지 않고 위의 함수를 이용하여서 값을 공유하고자 하였으나
+
+- set으로 바꾼후에 get을 하면 초기값으로 다시 설정되는 현상을 발견하게 되었다.
+
+- urlopen을 새로 할 때마다 함수가 새롭게 열려서 발생하는 현상인 것으로 판단하였다.
+
+- Web2py의 restful api라고 검색해본 결과 GET,POST,PUT 등과 같은 방식들이 db를 접근하는 방식으로 되어있는 것을 발견하였기 때문에 url 접근이 아닌 바로 db 값을 바꾸는 기존의 방식으로 돌아가기로 하였다.
+
