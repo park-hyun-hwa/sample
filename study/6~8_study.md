@@ -143,6 +143,62 @@
     	GPIO.cleanup()
 
 
-###9)명령을 LCD로 전달 할 때 알림음 실행하기###
+###9) 명령을 LCD로 전달 할 때 알림음 실행하기###
 
-- 진행중
+- pygame을 이용한 방법.
+	- `import pygame` 을 선언하고
+
+	-  `pygame.mixer.init()` 으로 초기화 해준 뒤
+
+	-  `pygame.mixer.music.load("[절대경로]")`를 수행하면 해당 mp3 파일을 재생할 수 있는 환경이 완성된다.
+
+	-  이 때 경로를 설정하는 것에 대해서 고민을 주로 하였는데
+
+	-  명령으로 수행되든, 백그라운드에서 수행되든 상관없이 설정하기 위해서 절대경로를 사용하기로 하였다.
+
+	-  그 후 `pygame.mixer.music.play()` 을 수행하면 재생이 시작되게 된다.
+
+- pygame 과 관련된 더 자세한 정리는 [요기](https://github.com/park-hyun-hwa/sample/blob/master/study/3_study_0714.md)에  정리하였다.
+
+
+###10) URL함수 이용하여 함수접근하기 ###
+
+- Web2py의 장점 중에 하나가 Restful api를 지원한다는 것이고, URL 함수는 중요한 함수 중에 하나이다.
+
+- URL 함수를 이용하여 action이나 static 파일에도 접근이 가능.
+
+- `URL('application','controller','function',args=['x','y'],vars=dict(z='t'))`라고 지정하면 `/application/controller/function/x/y?z=t` 라는 url로 매핑된다.
+
+- static 파일에 접근하고 싶을 때는 `URL('static','images/icons/arrow.png')` 라는 형식으로 접근이 가능.
+
+- URL 함수는 단지 주소를 간편하게 매핑 시켜주는 역할.
+
+- 나는 URL을 실행함으로써 반환되는 값을 이용하고 싶었기 때문에 `urllib2`에 있는 `urlopen`이라는 함수를 이용하기로 함.
+
+- `urllib2.urlopen('주소').read()`를 이용하면 반환되는 값을 이용할 수 있다.
+
+- DB를 이용하여서 값을 공유하는 방식을 쓰지 않고 위의 함수를 이용하여서 값을 공유하고자 하였으나
+
+- set으로 바꾼후에 get을 하면 초기값으로 다시 설정되는 현상을 발견하게 되었다.
+
+- urlopen을 새로 할 때마다 함수가 새롭게 열려서 발생하는 현상인 것으로 판단하였다.
+
+- Web2py의 restful api라고 검색해본 결과 GET,POST,PUT 등과 같은 방식들이 db를 접근하는 방식으로 되어있는 것을 발견하였기 때문에 url 접근이 아닌 바로 db 값을 바꾸는 기존의 방식으로 돌아가기로 하였다.
+
+###11) Log를 찍어서 진행상태 확인하기 ###
+
+- `web2py/example`에 있는 `logging.conf`를 `web2py/`에 이동시킨다.
+
+- 그 후에는 `web2py/logs` 에 `web2py.log` 라는 파일이 생성되게 된다.
+
+- cron으로 실행되는 함수의 log를 확인하기 위해서 시작하였기 때문에 `logging.conf`에 있는 `cron 파트`를 약간 수정해야한다.
+
+- [ logger_cron ] 파트에서 level에는 원래 WARNING으로 설정이 되어있으나
+
+- DEBUG로 바꾸어주면 관련된 많은 log들을 확인 할 수 있다.
+
+- log를 확인 할 시에 파일을 열면 필요한 부분은 아래쪽의 몇줄만 필요한 것이기 때문에 
+
+- `tail -n [줄수] web2py.log`를 수행하면 아래쪽에서 원하는 줄 수 만큼 볼 수 있다.
+
+- 또한 `tail -n [줄수] -f web2py.log`를 수행하면 실시간으로 쌓이는 것을 확인 할 수 있다.
